@@ -16,6 +16,7 @@ abstract class AppValues {
   static const double smallMargin = 8;
   static const double extraSmallMargin = 6;
   static const double largeMargin = 24;
+  static const double margin_45 = 45;
   static const double margin_40 = 40;
   static const double margin_32 = 32;
   static const double margin_18 = 18;
@@ -38,6 +39,7 @@ abstract class AppValues {
   static const double largeRadius = 24;
   static const double roundedButtonRadius = 24;
   static const double extraLargeRadius = 36;
+  static const double extraLargeImageRadius = 150;
 
   static const double elevation = 16;
   static const double smallElevation = 8;
@@ -97,4 +99,9 @@ abstract class AppValues {
   static const int defaultThrottleTimeInMilliSeconds = 500;
 
   static const double height_16 = 16;
+  static const double inputHeight = 54;
+
+  static const double itemBottomSheet = 30.0;
+  static const double borderBottomSheet = 30.0;
+  static const double itemHandleBottomSheet = 62.0;
 }

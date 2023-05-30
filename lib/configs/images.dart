@@ -7,14 +7,13 @@ class _Image extends AssetImage {
 }
 
 class AppImages {
-  // static const bulbasaur = _Image('bulbasaur.png');
-  // static const charmander = _Image('charmander.png');
-  // static const squirtle = _Image('squirtle.png');
-  // static const pokeball = _Image('pokeball.png');
-  // static const male = _Image('male.png');
-  // static const female = _Image('female.png');
-  // static const dotted = _Image('dotted.png');
-  // static const thumbnail = _Image('thumbnail.png');
+  static const introduction1 = _Image('introduction1.png');
+  static const introduction2 = _Image('introduction2.png');
+  static const introduction3 = _Image('introduction3.png');
+  static const welcome = _Image('welcome.png');
+  static const googleIcon = '$_imagePath/ic_google.svg';
+  static const facebookIcon = '$_imagePath/ic_facebook.svg';
+  static const appleIcon = '$_imagePath/ic_apple.svg';
   // static const pikloader = _Image('pika_loader.gif');
 
   // static Future precacheAssets(BuildContext context) async {}
