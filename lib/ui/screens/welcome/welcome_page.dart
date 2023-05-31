@@ -36,6 +36,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     AppNavigator.push(Routes.login);
   }
 
+  void onSignUp() async {
+    AppNavigator.push(Routes.sign_up);
+  }
+
   @override
   void initState() {
     super.initState();
@@ -77,9 +81,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 child: ElevatedButton(
                     style:
                         ElevatedButtonThemeApp.lightElevatedButtonTheme.style,
-                    onPressed: () {
-                      return;
-                    },
+                    onPressed: onSignUp,
                     child: const Text('Sign Up'))),
             buttonSocial(buttonWidth)
           ],

@@ -109,7 +109,7 @@ class TextButtonThemeApp {
 
   static final TextButtonThemeData dartTextButtonTheme = TextButtonThemeData(
       style: textButtonStyle.merge(TextButton.styleFrom(
-    foregroundColor: AppColors.lighterGrey,
+    foregroundColor: AppColors.black,
   )));
 }
 
@@ -124,16 +124,16 @@ class ElevatedButtonThemeApp {
   static final ElevatedButtonThemeData lightElevatedButtonTheme =
       ElevatedButtonThemeData(
           style: elevatedButtonStyle.merge(OutlinedButton.styleFrom(
-    backgroundColor: AppColors.lightGrey,
-    foregroundColor: AppColors.darkGreen,
-  )));
+              backgroundColor: AppColors.lightGrey,
+              foregroundColor: AppColors.darkGreen,
+              disabledBackgroundColor: AppColors.grey)));
 
   static final ElevatedButtonThemeData dartElevatedButtonTheme =
       ElevatedButtonThemeData(
           style: elevatedButtonStyle.merge(OutlinedButton.styleFrom(
-    backgroundColor: AppColors.darkGreen,
-    foregroundColor: AppColors.lightGrey,
-  )));
+              backgroundColor: AppColors.darkGreen,
+              foregroundColor: AppColors.lightGrey,
+              disabledBackgroundColor: AppColors.grey)));
 }
 
 class OutlinedButtonThemeApp {
