@@ -36,4 +36,5 @@ class AppColors {
   static const Color itemHandleColor = Color(0xFFE0E0E0);
   static Color itemBottomSheetSelected =
       const Color(0xFFD9D9D9).withOpacity(0.2);
+  static Color backgroundBlackOpacity200 = Colors.black.withOpacity(0.2);
 }

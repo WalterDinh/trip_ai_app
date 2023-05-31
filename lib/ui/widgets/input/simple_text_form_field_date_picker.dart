@@ -15,7 +15,6 @@ class SimpleTextFormFieldDatePickerController<T> {
   }
 
   void _rootOnChanged(e) {
-    print("Masuk sini ${e.toString()}");
     setState(() {
       _value = e;
       if (onChanged != null) {
@@ -39,6 +38,10 @@ class SimpleTextFormFieldDatePickerController<T> {
     }
 
     return valid;
+  }
+
+  set value(dynamic value) {
+    _value = value;
   }
 
   void _init(Function(VoidCallback fn) setStateX, bool requiredX) {
@@ -103,40 +106,46 @@ class _SimpleTextFormFieldDatePickerState<T>
               height: bottomSheetHeight,
               child: Column(
                 children: [
+                  buttonBottomSheet(),
                   SizedBox(
-                    width: double.infinity,
-                    child: TextButton(
-                        style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all(
-                                Theme.of(context).primaryColor),
-                            padding: MaterialStateProperty.all<EdgeInsets>(
-                                const EdgeInsets.all(16)),
-                            foregroundColor:
-                                MaterialStateProperty.all<Color>(Colors.white),
-                            shape: MaterialStateProperty.all<
-                                RoundedRectangleBorder>(
-                              const RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(24.0),
-                                      topRight: Radius.circular(24.0))),
-                            )),
-                        onPressed: () => null,
-                        child: const Text("Add to cart",
-                            style: TextStyle(fontSize: 15))),
-                  ),
-                  SizedBox(
-                    height: dataPickerHeight,
-                    child: CupertinoDatePicker(
-                        use24hFormat: true,
-                        mode: CupertinoDatePickerMode.date,
-                        initialDateTime: DateTime.now(),
-                        onDateTimeChanged: (val) {
-                          widget.controller._rootOnChanged(val);
-                        }),
-                  ),
+                      height: dataPickerHeight,
+                      child: CupertinoTheme(
+                        data: const CupertinoThemeData(
+                          brightness: Brightness.light,
+                        ),
+                        child: CupertinoDatePicker(
+                            use24hFormat: true,
+                            mode: CupertinoDatePickerMode.date,
+                            initialDateTime:
+                                widget.controller._value ?? DateTime.now(),
+                            onDateTimeChanged: (val) {
+                              widget.controller._rootOnChanged(val);
+                            }),
+                      ))
                 ],
               ),
             ));
+  }
+
+  Widget buttonBottomSheet() {
+    return SizedBox(
+      width: double.infinity,
+      child: TextButton(
+          style: ButtonStyle(
+              backgroundColor:
+                  MaterialStateProperty.all(Theme.of(context).primaryColor),
+              padding: MaterialStateProperty.all<EdgeInsets>(
+                  const EdgeInsets.all(16)),
+              foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(24.0),
+                        topRight: Radius.circular(24.0))),
+              )),
+          onPressed: () => null,
+          child: const Text("Select date", style: TextStyle(fontSize: 15))),
+    );
   }
 
   @override

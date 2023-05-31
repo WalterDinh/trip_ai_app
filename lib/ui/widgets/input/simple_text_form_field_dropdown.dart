@@ -15,6 +15,10 @@ class SimpleTextFormFieldDropDownController<T> {
     return _value;
   }
 
+  set value(dynamic value) {
+    _value = value;
+  }
+
   void _rootOnChanged(e) {
     setState(() {
       _value = e;
