@@ -7,7 +7,7 @@ import 'fonts.dart';
 class Theming {
   static final ThemeData darkTheme = ThemeData(
     brightness: Brightness.dark,
-    primaryColor: AppColors.blue,
+    primaryColor: AppColors.darkGreen,
     appBarTheme: const AppBarTheme(
       toolbarTextStyle: TextThemeApp.darkText,
     ),
@@ -18,13 +18,16 @@ class Theming {
     outlinedButtonTheme: OutlinedButtonThemeApp.dartOutlinedButtonTheme,
     elevatedButtonTheme: ElevatedButtonThemeApp.dartElevatedButtonTheme,
     scaffoldBackgroundColor: AppColors.black,
-    colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.blue)
-        .copyWith(background: AppColors.black, brightness: Brightness.dark),
+    disabledColor: AppColors.grey,
+    colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.blue).copyWith(
+      background: AppColors.black,
+      brightness: Brightness.dark,
+    ),
   );
 
   static final ThemeData lightTheme = ThemeData(
     brightness: Brightness.light,
-    primaryColor: AppColors.blue,
+    primaryColor: AppColors.darkGreen,
     iconTheme: IconThemeApp.iconLightTheme,
     appBarTheme: const AppBarTheme(
       toolbarTextStyle: TextThemeApp.lightText,
@@ -35,34 +38,62 @@ class Theming {
     elevatedButtonTheme: ElevatedButtonThemeApp.lightElevatedButtonTheme,
     textTheme: TextThemeApp.lightTextTheme,
     scaffoldBackgroundColor: AppColors.lightGrey,
+    disabledColor: AppColors.grey,
     colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.blue).copyWith(
         background: AppColors.whiteGrey, brightness: Brightness.light),
   );
 }
 
 class InputDecorationThemeApp {
-  static InputDecorationTheme inputDecorationStyle = InputDecorationTheme();
+  static InputDecorationTheme inputDecorationStyle = InputDecorationTheme(
+    // filled: true,
+    labelStyle: TextThemeApp.labelMediumText,
+
+    hintStyle: const TextStyle(color: AppColors.grey),
+    fillColor: Colors.black,
+    prefixStyle: TextStyle(
+      color: Colors.black.withOpacity(0.6),
+    ),
+  );
 
   static const InputDecorationTheme lightInputDecorationStyle =
       InputDecorationTheme(
-    focusedBorder:
-        OutlineInputBorder(borderSide: BorderSide(color: AppColors.whiteGrey)),
-    disabledBorder:
-        OutlineInputBorder(borderSide: BorderSide(color: AppColors.whiteGrey)),
+    errorBorder: OutlineInputBorder(
+      borderSide: BorderSide(color: Colors.red),
+      borderRadius: BorderRadius.all(Radius.circular(10.0)),
+    ),
+    focusedErrorBorder: OutlineInputBorder(
+      borderSide: BorderSide(color: AppColors.darkGreen),
+      borderRadius: BorderRadius.all(Radius.circular(10.0)),
+    ),
+    focusedBorder: OutlineInputBorder(
+      borderSide: BorderSide(color: AppColors.darkGreen),
+      borderRadius: BorderRadius.all(Radius.circular(10.0)),
+    ),
     enabledBorder: OutlineInputBorder(
-        borderSide: BorderSide(color: AppColors.lighterGrey)),
-    focusColor: AppColors.black,
+      borderSide: BorderSide(color: AppColors.grey),
+      borderRadius: BorderRadius.all(Radius.circular(10.0)),
+    ),
   );
 
   static const InputDecorationTheme dartInputDecorationStyle =
       InputDecorationTheme(
-    focusedBorder:
-        OutlineInputBorder(borderSide: BorderSide(color: AppColors.black)),
-    disabledBorder:
-        OutlineInputBorder(borderSide: BorderSide(color: AppColors.semiGrey)),
-    enabledBorder:
-        OutlineInputBorder(borderSide: BorderSide(color: AppColors.black)),
-    focusColor: AppColors.lightGrey,
+    errorBorder: OutlineInputBorder(
+      borderSide: BorderSide(color: Colors.red),
+      borderRadius: BorderRadius.all(Radius.circular(10.0)),
+    ),
+    focusedErrorBorder: OutlineInputBorder(
+      borderSide: BorderSide(color: AppColors.darkGreen),
+      borderRadius: BorderRadius.all(Radius.circular(10.0)),
+    ),
+    focusedBorder: OutlineInputBorder(
+      borderSide: BorderSide(color: AppColors.darkGreen),
+      borderRadius: BorderRadius.all(Radius.circular(10.0)),
+    ),
+    enabledBorder: OutlineInputBorder(
+      borderSide: BorderSide(color: AppColors.grey),
+      borderRadius: BorderRadius.all(Radius.circular(10.0)),
+    ),
   );
 }
 
@@ -78,7 +109,7 @@ class TextButtonThemeApp {
 
   static final TextButtonThemeData dartTextButtonTheme = TextButtonThemeData(
       style: textButtonStyle.merge(TextButton.styleFrom(
-    foregroundColor: AppColors.lighterGrey,
+    foregroundColor: AppColors.black,
   )));
 }
 
@@ -93,16 +124,16 @@ class ElevatedButtonThemeApp {
   static final ElevatedButtonThemeData lightElevatedButtonTheme =
       ElevatedButtonThemeData(
           style: elevatedButtonStyle.merge(OutlinedButton.styleFrom(
-    backgroundColor: AppColors.black,
-    foregroundColor: AppColors.lightGrey,
-  )));
+              backgroundColor: AppColors.lightGrey,
+              foregroundColor: AppColors.darkGreen,
+              disabledBackgroundColor: AppColors.grey)));
 
   static final ElevatedButtonThemeData dartElevatedButtonTheme =
       ElevatedButtonThemeData(
           style: elevatedButtonStyle.merge(OutlinedButton.styleFrom(
-    backgroundColor: AppColors.lightGrey,
-    foregroundColor: AppColors.black,
-  )));
+              backgroundColor: AppColors.darkGreen,
+              foregroundColor: AppColors.lightGrey,
+              disabledBackgroundColor: AppColors.grey)));
 }
 
 class OutlinedButtonThemeApp {
@@ -136,14 +167,14 @@ class IconThemeApp {
     size: AppValues.iconSize_18,
   );
   static const IconThemeData iconLightTheme = IconThemeData(
-    color: AppColors.darkGrey,
+    color: AppColors.blueGrey,
     size: AppValues.iconSize_18,
   );
 }
 
 class TextThemeApp {
   static const TextStyle darkText = TextStyle(
-    color: AppColors.whiteGrey,
+    color: AppColors.black,
     fontFamily: AppFonts.circularStd,
   );
 

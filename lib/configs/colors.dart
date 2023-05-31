@@ -6,15 +6,19 @@ class AppColors {
   static const Color blue = Color(0xFF429BED);
   static const Color brown = Color(0xFFB1736C);
   static const Color darkBrown = Color(0xD0795548);
-  static const Color darkGrey = Color(0xFF303943);
-  static const Color grey = Color(0x64303943);
+  static const Color blueGrey = Color(0xFF97ADB6);
+  static const Color darkGrey = Color(0xFF979797);
+  static const Color darkGreen = Color(0xFF326E6C);
+  static const Color grey = Color(0xFFBDBDBD);
+  static const Color grey800 = Color(0xFF828282);
+
   static const Color indigo = Color(0xFF6C79DB);
   static const Color lightBlue = Color(0xFF7AC7FF);
   static const Color lightBrown = Color(0xFFCA8179);
   static const Color whiteGrey = Color(0xFFFDFDFD);
   static const Color lightCyan = Color(0xFF98D8D8);
   static const Color lightGreen = Color(0xFF78C850);
-  static const Color lighterGrey = Color(0xFFF4F5F4);
+  static const Color lighterGrey = Color(0xFFBDBDBD);
   static const Color lightGrey = Color(0xFFF5F5F5);
   static const Color lightPink = Color(0xFFEE99AC);
   static const Color lightPurple = Color(0xFF9F5BBA);
@@ -29,4 +33,8 @@ class AppColors {
   static const Color yellow = Color(0xFFF6C747);
   static const Color semiGrey = Color(0xFFbababa);
   static const Color violet = Color(0xD07038F8);
+  static const Color itemHandleColor = Color(0xFFE0E0E0);
+  static Color itemBottomSheetSelected =
+      const Color(0xFFD9D9D9).withOpacity(0.2);
+  static Color backgroundBlackOpacity200 = Colors.black.withOpacity(0.2);
 }
