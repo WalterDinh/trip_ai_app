@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:my_app/configs/images.dart';
 import 'package:my_app/routes.dart';
 import 'package:my_app/ui/screens/home/home.dart';
+import 'package:my_app/ui/screens/notifications/notifications.dart';
 
 import 'widgets/bottom_app_bar.dart';
 
@@ -10,14 +11,14 @@ final List<Widget> _pages = [
   const HomeScreen(),
   const HomeScreen(),
   const HomeScreen(),
-  const HomeScreen(),
+  const NotificationScreen(),
   const HomeScreen(),
 ];
 
 List<String> listOfIcons = [
   AppImages.homeIcon,
   AppImages.myTripIcon,
-  AppImages.addIcon,
+  AppImages.circleAddIcon,
   AppImages.notificationIcon,
   AppImages.profileIcon,
 ];
