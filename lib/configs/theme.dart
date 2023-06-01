@@ -14,11 +14,12 @@ class Theming {
     iconTheme: IconThemeApp.iconDartTheme,
     inputDecorationTheme: InputDecorationThemeApp.dartInputDecorationStyle,
     textTheme: TextThemeApp.dartTextTheme,
-    textButtonTheme: TextButtonThemeApp.dartTextButtonTheme,
     outlinedButtonTheme: OutlinedButtonThemeApp.dartOutlinedButtonTheme,
     elevatedButtonTheme: ElevatedButtonThemeApp.dartElevatedButtonTheme,
     scaffoldBackgroundColor: AppColors.black,
-    disabledColor: AppColors.grey,
+    bottomAppBarColor: AppColors.darkGreen,
+    focusColor: AppColors.whiteGrey,
+    hintColor: AppColors.conch,
     colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.blue).copyWith(
       background: AppColors.black,
       brightness: Brightness.dark,
@@ -33,11 +34,11 @@ class Theming {
       toolbarTextStyle: TextThemeApp.lightText,
     ),
     inputDecorationTheme: InputDecorationThemeApp.lightInputDecorationStyle,
-    textButtonTheme: TextButtonThemeApp.lightTextButtonTheme,
     outlinedButtonTheme: OutlinedButtonThemeApp.lightOutlinedButtonTheme,
     elevatedButtonTheme: ElevatedButtonThemeApp.lightElevatedButtonTheme,
     textTheme: TextThemeApp.lightTextTheme,
     scaffoldBackgroundColor: AppColors.lightGrey,
+    bottomAppBarColor: AppColors.darkGreen,
     disabledColor: AppColors.grey,
     colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.blue).copyWith(
         background: AppColors.whiteGrey, brightness: Brightness.light),
@@ -104,12 +105,12 @@ class TextButtonThemeApp {
 
   static final TextButtonThemeData lightTextButtonTheme = TextButtonThemeData(
       style: textButtonStyle.merge(TextButton.styleFrom(
-    foregroundColor: AppColors.black,
+    foregroundColor: AppColors.whiteGrey,
   )));
 
   static final TextButtonThemeData dartTextButtonTheme = TextButtonThemeData(
       style: textButtonStyle.merge(TextButton.styleFrom(
-    foregroundColor: AppColors.black,
+    foregroundColor: AppColors.grey,
   )));
 }
 
@@ -186,19 +187,19 @@ class TextThemeApp {
   static const TextStyle headlineLargeText =
       TextStyle(fontSize: 32, height: 1.2, fontWeight: FontWeight.w700);
   static const TextStyle headlineMediumText =
-      TextStyle(fontSize: 22, height: 14 / 11, fontWeight: FontWeight.w700);
+      TextStyle(fontSize: 24, height: 14 / 11, fontWeight: FontWeight.w700);
   static const TextStyle headlineSmallText =
-      TextStyle(fontSize: 14, height: 10 / 7, fontWeight: FontWeight.w600);
+      TextStyle(fontSize: 20, height: 10 / 7, fontWeight: FontWeight.w600);
 
   static const TextStyle bodyLargeText =
-      TextStyle(fontSize: 15, height: 4 / 3, fontWeight: FontWeight.w600);
+      TextStyle(fontSize: 18, height: 4 / 3, fontWeight: FontWeight.w700);
   static const TextStyle bodyMediumText =
       TextStyle(fontSize: 14, height: 9 / 7, fontWeight: FontWeight.w500);
   static const TextStyle bodySmallText =
       TextStyle(fontSize: 13, height: 13 / 16, fontWeight: FontWeight.w400);
 
   static const TextStyle labelLargeText =
-      TextStyle(fontSize: 15, height: 4 / 3, fontWeight: FontWeight.w600);
+      TextStyle(fontSize: 16, height: 3 / 2, fontWeight: FontWeight.w600);
   static const TextStyle labelMediumText =
       TextStyle(fontSize: 14, height: 9 / 7, fontWeight: FontWeight.w500);
   static const TextStyle labelSmallText =
@@ -212,9 +213,9 @@ class TextThemeApp {
       TextStyle(fontSize: 13, height: 13 / 16, fontWeight: FontWeight.w400);
 
   static const TextStyle titleLargeText =
-      TextStyle(fontSize: 15, height: 4 / 3, fontWeight: FontWeight.w600);
+      TextStyle(fontSize: 18, height: 4 / 3, fontWeight: FontWeight.w600);
   static const TextStyle titleMediumText =
-      TextStyle(fontSize: 14, height: 9 / 7, fontWeight: FontWeight.w500);
+      TextStyle(fontSize: 16, height: 9 / 7, fontWeight: FontWeight.w500);
   static const TextStyle titleSmallText =
       TextStyle(fontSize: 13, height: 13 / 16, fontWeight: FontWeight.w400);
 

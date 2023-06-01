@@ -39,7 +39,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void onLogin() async {
-    AppNavigator.push(Routes.login);
+    AppNavigator.push(Routes.main);
   }
 
   @override
