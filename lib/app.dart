@@ -19,6 +19,7 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       color: Colors.white,
       title: 'Flutter',
+      debugShowCheckedModeBanner: false,
       theme: isDark ? Theming.darkTheme : Theming.lightTheme,
       navigatorKey: AppNavigator.navigatorKey,
       localizationsDelegates: AppLocalizations.localizationsDelegates,

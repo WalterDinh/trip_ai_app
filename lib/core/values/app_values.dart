@@ -32,6 +32,7 @@ abstract class AppValues {
   static const double extraLargeSpacing = 96;
 
   static const double radius = 16;
+  static const double radius_10 = 10;
   static const double radius_zero = 0;
   static const double smallRadius = 8;
   static const double radius_6 = 6;

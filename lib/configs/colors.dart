@@ -11,7 +11,8 @@ class AppColors {
   static const Color darkGreen = Color(0xFF326E6C);
   static const Color grey = Color(0xFFBDBDBD);
   static const Color grey800 = Color(0xFF828282);
-
+  static const Color grey500 = Color(0xFFF2F2F2);
+  static const Color conch = Color(0xFF99B7B6);
   static const Color indigo = Color(0xFF6C79DB);
   static const Color lightBlue = Color(0xFF7AC7FF);
   static const Color lightBrown = Color(0xFFCA8179);
@@ -33,8 +34,16 @@ class AppColors {
   static const Color yellow = Color(0xFFF6C747);
   static const Color semiGrey = Color(0xFFbababa);
   static const Color violet = Color(0xD07038F8);
+
   static const Color itemHandleColor = Color(0xFFE0E0E0);
   static Color itemBottomSheetSelected =
       const Color(0xFFD9D9D9).withOpacity(0.2);
   static Color backgroundBlackOpacity200 = Colors.black.withOpacity(0.2);
+  static const Color backgroundDefaultImageColor = Color(0xffafafaf);
+  static const Color textColorGreyLight = Color(0xFFABABAB);
+  static const Color textColorGreyDark = Color(0xFF979797);
+  static Color elevatedContainerColorOpacity = Colors.grey.withOpacity(0.5);
+  static Color textHintColorGrey = const Color(0xFF0D0D0D).withOpacity(0.5);
+  static Color backgroundTextFieldOpacity =
+      const Color.fromARGB(10, 50, 110, 108);
 }

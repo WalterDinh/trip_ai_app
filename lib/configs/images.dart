@@ -14,7 +14,9 @@ class AppImages {
   static const googleIcon = '$_imagePath/ic_google.svg';
   static const facebookIcon = '$_imagePath/ic_facebook.svg';
   static const appleIcon = '$_imagePath/ic_apple.svg';
-  // static const pikloader = _Image('pika_loader.gif');
-
-  // static Future precacheAssets(BuildContext context) async {}
+  static const homeIcon = '$_imagePath/ic_home.svg';
+  static const myTripIcon = '$_imagePath/ic_my_trip.svg';
+  static const addIcon = '$_imagePath/ic_add.svg';
+  static const notificationIcon = '$_imagePath/ic_notification.svg';
+  static const profileIcon = '$_imagePath/ic_profile.svg';
 }

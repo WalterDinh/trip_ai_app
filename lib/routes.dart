@@ -5,10 +5,11 @@ import 'package:my_app/states/sign_up/sign_up_cubit.dart';
 import 'package:my_app/ui/screens/home/home.dart';
 import 'package:my_app/ui/screens/intro/intro.dart';
 import 'package:my_app/ui/screens/login/login_page.dart';
+import 'package:my_app/ui/screens/main/main_app.dart';
 import 'package:my_app/ui/screens/signup/sign_up_page.dart';
 import 'package:my_app/ui/screens/welcome/welcome_page.dart';
 
-enum Routes { splash, home, welcome, login, sign_up }
+enum Routes { splash, home, welcome, login, sign_up, main }
 
 class _Paths {
   static const String splash = '/';
@@ -16,6 +17,7 @@ class _Paths {
   static const String welcome = '/welcome';
   static const String login = '/login';
   static const String sign_up = '/sign_up';
+  static const String main = '/main';
 
   static const Map<Routes, String> _pathMap = {
     Routes.splash: _Paths.splash,
@@ -23,6 +25,7 @@ class _Paths {
     Routes.welcome: _Paths.welcome,
     Routes.login: _Paths.login,
     Routes.sign_up: _Paths.sign_up,
+    Routes.main: _Paths.main,
   };
 
   static String of(Routes route) => _pathMap[route] ?? splash;
@@ -43,6 +46,8 @@ class AppNavigator {
         return FadeRoute(page: const HomeScreen());
       case _Paths.login:
         return FadeRoute(page: const LoginScreen());
+      case _Paths.main:
+        return FadeRoute(page: MainAppNavigator());
       default:
         return FadeRoute(page: const IntroScreen());
     }
