@@ -6,10 +6,12 @@ import 'package:my_app/ui/screens/home/home.dart';
 import 'package:my_app/ui/screens/intro/intro.dart';
 import 'package:my_app/ui/screens/login/login_page.dart';
 import 'package:my_app/ui/screens/main/main_app.dart';
+import 'package:my_app/ui/screens/notification_detail/notification_detail.dart';
 import 'package:my_app/ui/screens/signup/sign_up_page.dart';
 import 'package:my_app/ui/screens/welcome/welcome_page.dart';
+import 'package:my_app/ui/screens/notifications/notifications.dart';
 
-enum Routes { splash, home, welcome, login, sign_up, main }
+enum Routes { splash, home, welcome, login, sign_up, main, notification_detail }
 
 class _Paths {
   static const String splash = '/';
@@ -18,6 +20,7 @@ class _Paths {
   static const String login = '/login';
   static const String sign_up = '/sign_up';
   static const String main = '/main';
+  static const String notificationDetail = '/notificationDetail';
 
   static const Map<Routes, String> _pathMap = {
     Routes.splash: _Paths.splash,
@@ -26,6 +29,7 @@ class _Paths {
     Routes.login: _Paths.login,
     Routes.sign_up: _Paths.sign_up,
     Routes.main: _Paths.main,
+    Routes.notification_detail: _Paths.notificationDetail,
   };
 
   static String of(Routes route) => _pathMap[route] ?? splash;
@@ -48,6 +52,8 @@ class AppNavigator {
         return FadeRoute(page: const LoginScreen());
       case _Paths.main:
         return FadeRoute(page: MainAppNavigator());
+      case _Paths.notificationDetail:
+        return FadeRoute(page: const NotificationDetailScreen());
       default:
         return FadeRoute(page: const IntroScreen());
     }

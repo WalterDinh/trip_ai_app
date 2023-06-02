@@ -19,4 +19,8 @@ class AppImages {
   static const addIcon = '$_imagePath/ic_add.svg';
   static const notificationIcon = '$_imagePath/ic_notification.svg';
   static const profileIcon = '$_imagePath/ic_profile.svg';
+  static const deleteIcon = '$_imagePath/ic_delete.svg';
+  static const heartIcon = '$_imagePath/ic_heart.svg';
+  static const shareIcon = '$_imagePath/ic_share.svg';
+  static const circleAddIcon = '$_imagePath/ic_add_circle.svg';
 }
