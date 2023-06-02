@@ -9,7 +9,6 @@ import 'package:my_app/ui/screens/main/main_app.dart';
 import 'package:my_app/ui/screens/notification_detail/notification_detail.dart';
 import 'package:my_app/ui/screens/signup/sign_up_page.dart';
 import 'package:my_app/ui/screens/welcome/welcome_page.dart';
-import 'package:my_app/ui/screens/notifications/notifications.dart';
 
 enum Routes { splash, home, welcome, login, sign_up, main, notification_detail }
 
