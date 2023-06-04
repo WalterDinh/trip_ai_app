@@ -197,6 +197,8 @@ class TextThemeApp {
       TextStyle(fontSize: 14, height: 9 / 7, fontWeight: FontWeight.w500);
   static const TextStyle bodySmallText =
       TextStyle(fontSize: 13, height: 13 / 16, fontWeight: FontWeight.w400);
+  static const TextStyle bodySmallerText =
+      TextStyle(fontSize: 12, fontWeight: FontWeight.w300);
 
   static const TextStyle labelLargeText =
       TextStyle(fontSize: 16, height: 3 / 2, fontWeight: FontWeight.w600);
