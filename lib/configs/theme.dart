@@ -185,7 +185,7 @@ class TextThemeApp {
   );
 
   static const TextStyle headlineLargeText =
-      TextStyle(fontSize: 32, height: 1.2, fontWeight: FontWeight.w700);
+      TextStyle(fontSize: 40, height: 1.12, fontWeight: FontWeight.w700);
   static const TextStyle headlineMediumText =
       TextStyle(fontSize: 24, height: 14 / 11, fontWeight: FontWeight.w700);
   static const TextStyle headlineSmallText =
@@ -203,14 +203,14 @@ class TextThemeApp {
   static const TextStyle labelMediumText =
       TextStyle(fontSize: 14, height: 9 / 7, fontWeight: FontWeight.w500);
   static const TextStyle labelSmallText =
-      TextStyle(fontSize: 13, height: 13 / 16, fontWeight: FontWeight.w400);
+      TextStyle(fontSize: 13, height: 16 / 13, fontWeight: FontWeight.w400);
 
   static const TextStyle displayLargeText =
       TextStyle(fontSize: 15, height: 4 / 3, fontWeight: FontWeight.w600);
   static const TextStyle displayMediumText =
       TextStyle(fontSize: 14, height: 9 / 7, fontWeight: FontWeight.w500);
   static const TextStyle displaySmallText =
-      TextStyle(fontSize: 13, height: 13 / 16, fontWeight: FontWeight.w400);
+      TextStyle(fontSize: 10, height: 13 / 16, fontWeight: FontWeight.w500);
 
   static const TextStyle titleLargeText =
       TextStyle(fontSize: 18, height: 4 / 3, fontWeight: FontWeight.w600);
