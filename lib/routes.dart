@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_app/core/fade_page_route.dart';
 import 'package:my_app/states/sign_up/sign_up_cubit.dart';
 import 'package:my_app/ui/screens/friends/friends.dart';
+import 'package:my_app/ui/screens/create_plan_trip/create_plan_trip_page.dart';
+import 'package:my_app/ui/screens/create_trip_form/create_trip_form_page.dart';
 import 'package:my_app/ui/screens/home/home.dart';
 import 'package:my_app/ui/screens/intro/intro.dart';
 import 'package:my_app/ui/screens/login/login_page.dart';
@@ -21,7 +23,9 @@ enum Routes {
   main,
   notification_detail,
   personal_info,
-  friends
+  friends,
+  create_trip_form,
+  create_plan_trip
 }
 
 class _Paths {
@@ -34,6 +38,8 @@ class _Paths {
   static const String notificationDetail = '/notifications/detail';
   static const String personalInfo = '/profile/personal_info';
   static const String friends = '/profile/friends';
+  static const String create_trip_form = '/create_trip_form';
+  static const String create_plan_trip = '/create_plan_trip';
 
   static const Map<Routes, String> _pathMap = {
     Routes.splash: _Paths.splash,
@@ -45,6 +51,8 @@ class _Paths {
     Routes.notification_detail: _Paths.notificationDetail,
     Routes.personal_info: _Paths.personalInfo,
     Routes.friends: _Paths.friends,
+    Routes.create_trip_form: _Paths.create_trip_form,
+    Routes.create_plan_trip: _Paths.create_plan_trip,
   };
 
   static String of(Routes route) => _pathMap[route] ?? splash;
@@ -57,6 +65,10 @@ class AppNavigator {
     switch (settings.name) {
       case _Paths.welcome:
         return FadeRoute(page: const WelcomeScreen());
+      case _Paths.create_trip_form:
+        return FadeRoute(page: const CreateTripFormScreen());
+      case _Paths.create_plan_trip:
+        return FadeRoute(page: const CreatePlanTripScreen());
       case _Paths.sign_up:
         return FadeRoute(
             page: BlocProvider(
