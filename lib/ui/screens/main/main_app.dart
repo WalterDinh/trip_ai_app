@@ -5,7 +5,6 @@ import 'package:my_app/routes.dart';
 import 'package:my_app/ui/screens/home/home.dart';
 import 'package:my_app/ui/screens/notifications/notifications.dart';
 import 'package:my_app/ui/screens/profile/profile.dart';
-import 'package:my_app/ui/screens/profile/testchart.dart';
 
 import 'widgets/bottom_app_bar.dart';
 

@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:my_app/configs/colors.dart';
 import 'package:my_app/core/base/base_widget_mixin.dart';
 
-class StatisticChart extends StatelessWidget with BaseWidgetMixin {
-  StatisticChart({Key? key}) : super(key: key);
+class ChartStatistic extends StatelessWidget with BaseWidgetMixin {
+  ChartStatistic({Key? key}) : super(key: key);
 
   final List<Color> gradientColors = [
     AppColors.lightGreen,
@@ -69,11 +69,12 @@ class StatisticChart extends StatelessWidget with BaseWidgetMixin {
         LineChartBarData(
           spots: const [
             FlSpot(0, 3),
-            FlSpot(1.6, 2),
-            FlSpot(3.1, 3.2),
-            FlSpot(3.9, 4.5),
-            FlSpot(4.6, 5.3),
-            FlSpot(5.9, 3),
+            FlSpot(1, 2),
+            FlSpot(2, 3.2),
+            FlSpot(3, 4.5),
+            FlSpot(4, 5.3),
+            FlSpot(5, 3),
+            FlSpot(6, 3),
           ],
           isCurved: true,
           gradient: LinearGradient(

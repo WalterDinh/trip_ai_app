@@ -21,7 +21,6 @@ class StatisticCard extends StatelessWidget with BaseWidgetMixin {
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
           color: AppColors.grey500,
-          // color: Colors.black,
           borderRadius: BorderRadius.circular(10)),
       child: Row(
         children: [

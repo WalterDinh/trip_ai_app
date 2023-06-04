@@ -1,14 +1,15 @@
 import 'dart:ui';
 
-import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:my_app/configs/colors.dart';
 import 'package:my_app/configs/images.dart';
+import 'package:my_app/configs/theme.dart';
 import 'package:my_app/core/values/app_values.dart';
-import 'package:my_app/ui/screens/profile/sections/statistic_chart.dart';
-import 'package:my_app/ui/screens/profile/widgets/place_item2.dart';
-import 'package:my_app/ui/screens/profile/widgets/statistic_card.dart';
+import 'package:my_app/routes.dart';
+import 'package:my_app/ui/screens/profile/sections/chart_statistic.dart';
+import 'package:my_app/ui/screens/profile/sections/list_favorite_place.dart';
+import 'package:my_app/ui/screens/profile/widgets/card_statistic.dart';
 import 'package:my_app/ui/widgets/cache_image.dart';
 import 'package:my_app/ui/widgets/main_app_bar.dart';
 import 'package:my_app/ui/widgets/ripple.dart';
@@ -42,7 +43,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             Container(
               height: 170,
               margin: const EdgeInsets.symmetric(horizontal: 50),
-              child: StatisticChart(),
+              child: ChartStatistic(),
             ),
             const VSpacer(24),
             Padding(
@@ -83,34 +84,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
             ),
             const VSpacer(40),
-            SizedBox(
+            const SizedBox(
               height: 320,
-              child: ListView.separated(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                itemCount: 3,
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) {
-                  return PlaceItem2(
-                    onTab: () {
-                      return;
-                    },
-                    listAvatar: const [
-                      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-qbCmdpCG8m5YwrGGHSvd0ghiNXAj-IOoiA&usqp=CAU",
-                      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-qbCmdpCG8m5YwrGGHSvd0ghiNXAj-IOoiA&usqp=CAU",
-                      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-qbCmdpCG8m5YwrGGHSvd0ghiNXAj-IOoiA&usqp=CAU",
-                    ],
-                    path:
-                        'https://www.studytienganh.vn/upload/2021/05/99552.jpeg',
-                    locationName: 'Trang An, Ninh Binh',
-                    placeName: 'Ninh Binh',
-                  );
-                },
-                separatorBuilder: (context, index) {
-                  return const Padding(
-                    padding: EdgeInsets.only(left: 24),
-                  );
-                },
-              ),
+              child: ListFavoritePlace(),
             ),
             VSpacer(MediaQuery.of(context).padding.bottom)
           ],
@@ -207,18 +183,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Column(
       children: [
         const VSpacer(24),
-        SizedBox(
-          width: 88,
-          height: 88,
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(44),
-            child: const CacheImage(
-              fit: BoxFit.cover,
-              path:
-                  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-qbCmdpCG8m5YwrGGHSvd0ghiNXAj-IOoiA&usqp=CAU',
-            ),
-          ),
-        ),
+        _personalInfoAvatar(),
         const VSpacer(14),
         const Text(
           'Nguyen Gnauq',
@@ -227,32 +192,51 @@ class _ProfileScreenState extends State<ProfileScreen> {
         const VSpacer(6),
         Text(
           'UX/UI Designer',
-          style: TextStyle(
-              color: Colors.grey.shade300,
-              fontWeight: FontWeight.w400,
-              fontSize: 12),
+          style: TextThemeApp.bodySmallerText
+              .copyWith(color: AppColors.itemHandleColor),
         ),
         const VSpacer(14),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Text(
-              '1599 Following',
-              style: TextStyle(
-                  color: Colors.grey.shade300,
-                  fontWeight: FontWeight.w400,
-                  fontSize: 12),
-            ),
-            Text(
-              '599 Follower',
-              style: TextStyle(
-                  color: Colors.grey.shade300,
-                  fontWeight: FontWeight.w400,
-                  fontSize: 12),
-            ),
-          ],
+        Ripple(
+          onTap: () {
+            AppNavigator.push(Routes.friends);
+          },
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Text(
+                '1599 Following',
+                style: TextThemeApp.bodySmallerText
+                    .copyWith(color: AppColors.itemHandleColor),
+              ),
+              Text(
+                '599 Follower',
+                style: TextThemeApp.bodySmallerText
+                    .copyWith(color: AppColors.itemHandleColor),
+              ),
+            ],
+          ),
         )
       ],
+    );
+  }
+
+  SizedBox _personalInfoAvatar() {
+    return SizedBox(
+      width: 88,
+      height: 88,
+      child: Ripple(
+        onTap: () {
+          AppNavigator.push(Routes.personal_info);
+        },
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(44),
+          child: const CacheImage(
+            fit: BoxFit.cover,
+            path:
+                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-qbCmdpCG8m5YwrGGHSvd0ghiNXAj-IOoiA&usqp=CAU',
+          ),
+        ),
+      ),
     );
   }
 
