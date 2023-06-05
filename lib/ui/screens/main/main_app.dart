@@ -46,7 +46,7 @@ class _MainAppNavigatorState extends State<MainAppNavigator> {
         listOfIcons: listOfIcons,
         onTap: (index) {
           if (index == 2) {
-            AppNavigator.push(Routes.login);
+            AppNavigator.push(Routes.create_trip_form);
           } else {
             setState(() {
               currentPage = index;
