@@ -20,10 +20,6 @@ class _UpcomingTripScreenState extends State<UpcomingTripScreen> {
             child: ItemMyTrip(),
           ),
         ),
-        VSpacer(24),
-        Placeholder(
-          fallbackHeight: 10,
-        ),
         VSpacer(24)
       ],
     );

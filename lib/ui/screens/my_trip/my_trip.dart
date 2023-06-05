@@ -21,6 +21,7 @@ class _MyTripScreenState extends State<MyTripScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: MainAppBar(),
       extendBody: true,
       body: Column(
