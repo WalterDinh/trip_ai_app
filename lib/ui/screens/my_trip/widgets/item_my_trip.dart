@@ -5,13 +5,15 @@ import 'package:my_app/configs/colors.dart';
 import 'package:my_app/configs/images.dart';
 import 'package:my_app/configs/theme.dart';
 import 'package:my_app/core/base/base_widget_mixin.dart';
+import 'package:my_app/core/values/app_values.dart';
+import 'package:my_app/ui/widgets/frosted_icon_button.dart';
 import 'package:my_app/ui/widgets/ripple.dart';
 import 'package:my_app/ui/widgets/spacer.dart';
 
 class ItemMyTrip extends StatelessWidget with BaseWidgetMixin {
-  const ItemMyTrip({
-    super.key,
-  });
+  const ItemMyTrip({super.key, required this.image});
+
+  final AssetImage image;
 
   @override
   Widget body(BuildContext context) {
@@ -22,16 +24,7 @@ class ItemMyTrip extends StatelessWidget with BaseWidgetMixin {
           Expanded(
             child: Stack(
               fit: StackFit.expand,
-              children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(24),
-                  child: const Image(
-                    image: AppImages.introduction2,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                _geoInfo(context)
-              ],
+              children: [_geoPhoto(), _buttonActions(), _geoInfo(context)],
             ),
           ),
           const VSpacer(24),
@@ -42,6 +35,16 @@ class ItemMyTrip extends StatelessWidget with BaseWidgetMixin {
             child: _buttonRecreateTrip(),
           )
         ],
+      ),
+    );
+  }
+
+  ClipRRect _geoPhoto() {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(AppValues.largeRadius),
+      child: Image(
+        image: image,
+        fit: BoxFit.cover,
       ),
     );
   }
@@ -194,6 +197,8 @@ class ItemMyTrip extends StatelessWidget with BaseWidgetMixin {
   }
 
   ClipRRect _backdropGeoInfo() {
+    double height = 76;
+
     return ClipRRect(
       borderRadius: const BorderRadius.only(
         topLeft: Radius.circular(15),
@@ -205,9 +210,27 @@ class ItemMyTrip extends StatelessWidget with BaseWidgetMixin {
         filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
         child: Container(
           width: double.infinity,
-          height: 76,
+          height: height,
           decoration: BoxDecoration(color: Colors.black.withOpacity(0.1)),
         ),
+      ),
+    );
+  }
+
+  Widget _buttonActions() {
+    double margin = 20;
+
+    return Positioned(
+      top: margin,
+      right: margin,
+      child: Column(
+        children: const [
+          FrostedIconButton(icon: AppImages.heartIcon),
+          VSpacer(12),
+          FrostedIconButton(icon: AppImages.heartIcon),
+          VSpacer(12),
+          FrostedIconButton(icon: AppImages.heartIcon),
+        ],
       ),
     );
   }

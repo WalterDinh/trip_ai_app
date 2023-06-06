@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:my_app/configs/images.dart';
 import 'package:my_app/core/values/app_values.dart';
 import 'package:my_app/ui/widgets/cache_image.dart';
-import 'package:my_app/ui/widgets/ripple.dart';
+import 'package:my_app/ui/widgets/frosted_icon_button.dart';
 import 'package:my_app/ui/widgets/spacer.dart';
 
 class NotificationDetailScreen extends StatefulWidget {
@@ -68,36 +67,17 @@ class _NotificationDetailScreenState extends State<NotificationDetailScreen> {
               margin: const EdgeInsets.symmetric(vertical: 16),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  _buildActionButton(const Color(0xFFE5E5E5), AppImages.addIcon),
-                  const HSpacer(16),
-                  _buildActionButton(
-                      const Color(0xFFE5E5E5), AppImages.heartIcon),
-                  const HSpacer(16),
-                  _buildActionButton(const Color(0xFFE5E5E5), AppImages.shareIcon),
+                children: const [
+                  FrostedIconButton(icon: AppImages.addIcon),
+                  HSpacer(16),
+                  FrostedIconButton(icon: AppImages.heartIcon),
+                  HSpacer(16),
+                  FrostedIconButton(icon: AppImages.shareIcon),
                 ],
               ),
             ),
           ],
         ),
-      ),
-    );
-  }
-
-  Widget _buildActionButton(color, String icon) {
-    return Ripple(
-      onTap: () {
-        return;
-      },
-      child: Container(
-        width: 44,
-        height: 44,
-        padding: const EdgeInsets.all(10),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          color: color,
-        ),
-        child: SvgPicture.asset(icon),
       ),
     );
   }
