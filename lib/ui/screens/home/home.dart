@@ -3,6 +3,7 @@ import 'package:my_app/configs/colors.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:my_app/core/base/base_widget_mixin.dart';
 import 'package:my_app/core/values/app_values.dart';
+import 'package:my_app/routes.dart';
 import 'package:my_app/ui/widgets/ripple.dart';
 import 'package:my_app/ui/widgets/spacer.dart';
 import 'widgets/item_category.dart';
@@ -34,6 +35,10 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void dispose() {
     super.dispose();
+  }
+
+  void onNavigateToDetail(int id) {
+    AppNavigator.push(Routes.detail_trip);
   }
 
   @override
@@ -76,7 +81,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             _searchBar(),
             tabBar(),
-            ListRecommend(heightCard),
+            ListRecommend(heightCard, (id) => onNavigateToDetail(id)),
             const SizedBox(
               height: AppValues.largePadding,
             ),

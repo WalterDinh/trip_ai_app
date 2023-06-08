@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:my_app/configs/colors.dart';
 import 'package:my_app/core/values/app_values.dart';
 import 'package:my_app/ui/widgets/cache_image.dart';
-import 'package:my_app/ui/widgets/ripple.dart';
 import 'package:my_app/ui/widgets/spacer.dart';
 import 'package:timelines/timelines.dart';
 
@@ -10,9 +9,7 @@ double heightImage = 100;
 double widthImage = 80;
 
 class TodoPlanTab extends StatefulWidget {
-  const TodoPlanTab({Key? key, required this.paddingBottom}) : super(key: key);
-
-  final double paddingBottom;
+  const TodoPlanTab({Key? key}) : super(key: key);
 
   @override
   State<TodoPlanTab> createState() => _TodoPlanTabState();
@@ -28,105 +25,48 @@ class _TodoPlanTabState extends State<TodoPlanTab>
     planTabController = TabController(initialIndex: 0, length: 3, vsync: this);
   }
 
-  Widget basicInfo(BuildContext context) {
-    return Padding(
-        padding: const EdgeInsets.symmetric(vertical: 8.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              '\$700',
-              style: Theme.of(context).textTheme.headlineLarge,
-            ),
-            _itemLeftBasicInfo(context),
-          ],
-        ));
-  }
-
-  Widget _itemLeftBasicInfo(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-          color: Theme.of(context).primaryColor,
-          borderRadius: const BorderRadius.all(Radius.circular(24.0))),
-      padding: const EdgeInsets.symmetric(horizontal: 32.0, vertical: 8.0),
-      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        Row(
-          children: const [
-            Icon(
-              Icons.calendar_month_rounded,
-              color: AppColors.whiteGrey,
-            ),
-            SizedBox(
-              width: AppValues.padding_4,
-            ),
-            Text(
-              '5 Days',
-              style: TextStyle(color: AppColors.whiteGrey),
-            )
-          ],
-        ),
-        Row(
-          children: const [
-            Icon(
-              Icons.location_city,
-              color: AppColors.whiteGrey,
-            ),
-            SizedBox(
-              width: AppValues.padding_4,
-            ),
-            Text(
-              '2 Cities',
-              style: TextStyle(color: AppColors.whiteGrey),
-            )
-          ],
-        )
-      ]),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        _buildTabBar(),
+        _buildTabBar(3),
         Expanded(
             child: TabBarView(
           controller: planTabController,
-          children: const <Widget>[PlanTrip()],
+          children: const <Widget>[PlanTrip(), PlanTrip(), PlanTrip()],
         ))
       ],
     );
   }
 
-  PreferredSizeWidget _buildTabBar() {
+  PreferredSizeWidget _buildTabBar(int totalDay) {
     return PreferredSize(
       preferredSize: const Size.fromHeight(kToolbarHeight),
       child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: TabBar(
-            isScrollable: false,
-            indicatorColor: Theme.of(context).primaryColor,
-            controller: planTabController,
-            labelColor: AppColors.darkGreen,
-            unselectedLabelColor: AppColors.grey,
-            splashBorderRadius: const BorderRadius.all(Radius.circular(14)),
-            tabs: [
-              const Tab(text: 'Day 1'),
-              const Tab(text: 'Day 2'),
-              const Tab(text: 'Day 3'),
-              Tab(
-                child: Ripple(
-                  onTap: () {
-                    return;
-                  },
-                  child: const Icon(
-                    Icons.add_circle,
-                    color: AppColors.darkGreen,
-                  ),
-                ),
-              ),
-            ],
-          )),
+          child: Row(children: <Widget>[
+            Expanded(
+                child: TabBar(
+                    isScrollable: totalDay > 4,
+                    indicatorColor: Theme.of(context).primaryColor,
+                    controller: planTabController,
+                    labelColor: AppColors.darkGreen,
+                    unselectedLabelColor: AppColors.grey,
+                    splashBorderRadius:
+                        const BorderRadius.all(Radius.circular(14)),
+                    tabs: List<Widget>.generate(
+                        totalDay, (index) => Tab(text: 'Day ${index + 1}')))),
+            IconButton(
+                onPressed: () {
+                  return;
+                },
+                splashRadius: AppValues.iconSize_28,
+                icon: const Icon(
+                  Icons.add_circle,
+                  color: AppColors.darkGreen,
+                  size: AppValues.iconSize_28,
+                ))
+          ])),
     );
   }
 }

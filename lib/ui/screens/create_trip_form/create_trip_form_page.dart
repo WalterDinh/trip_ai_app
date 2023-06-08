@@ -27,8 +27,15 @@ class _CreateTripFormScreenState extends State<CreateTripFormScreen> {
       SimpleTextFormFieldController();
   final SimpleTextFormFieldDatePickerController startDateController =
       SimpleTextFormFieldDatePickerController();
+
   final SimpleTextFormFieldDatePickerController endDateController =
       SimpleTextFormFieldDatePickerController();
+
+  final SimpleTextFormFieldController startPlaceController =
+      SimpleTextFormFieldController();
+
+  final SimpleTextFormFieldController endPlaceController =
+      SimpleTextFormFieldController();
 
   bool showTitle = false;
 
@@ -104,6 +111,10 @@ class _CreateTripFormScreenState extends State<CreateTripFormScreen> {
   Widget boxInput() {
     return Column(
       children: [
+        inputPlace(),
+        const SizedBox(
+          height: AppValues.padding,
+        ),
         SimpleTextFormField(
           controller: textNameTripController,
           errorTextSize: 8,
@@ -142,6 +153,38 @@ class _CreateTripFormScreenState extends State<CreateTripFormScreen> {
         ),
         const SizedBox(
           height: AppValues.largePadding,
+        ),
+      ],
+    );
+  }
+
+  Widget inputPlace() {
+    return Row(
+      children: [
+        Expanded(
+          child: SimpleTextFormField(
+            controller: startPlaceController,
+            errorTextSize: 8,
+            maxLength: 12,
+            // isRequired: true,
+            placeHolder: 'Trip name',
+            label: 'Trip name',
+            type: InputTextType.text,
+          ),
+        ),
+        const SizedBox(
+          width: AppValues.largePadding,
+        ),
+        Expanded(
+          child: SimpleTextFormField(
+            controller: endPlaceController,
+            errorTextSize: 8,
+            maxLength: 12,
+            // isRequired: true,
+            placeHolder: 'Trip name',
+            label: '',
+            type: InputTextType.text,
+          ),
         ),
       ],
     );

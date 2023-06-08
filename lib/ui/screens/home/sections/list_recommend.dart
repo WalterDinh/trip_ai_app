@@ -1,8 +1,10 @@
 part of '../home.dart';
 
 class ListRecommend extends StatelessWidget with BaseWidgetMixin {
-  ListRecommend(this.heightCard);
+  ListRecommend(this.heightCard, this.onPressItem);
   final double heightCard;
+
+  final Function(int id) onPressItem;
 
   @override
   Widget body(BuildContext context) {
@@ -20,7 +22,7 @@ class ListRecommend extends StatelessWidget with BaseWidgetMixin {
             itemBuilder: (_, index) {
               return ItemRecommend(
                 onTab: () {
-                  return;
+                  onPressItem(0);
                 },
                 listAvatar: const [
                   "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-qbCmdpCG8m5YwrGGHSvd0ghiNXAj-IOoiA&usqp=CAU",

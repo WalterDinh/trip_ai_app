@@ -1,10 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:my_app/configs/colors.dart';
-import 'package:my_app/core/extensions/extension.dart';
-import 'package:my_app/core/values/app_values.dart';
-import 'package:my_app/ui/widgets/cache_image.dart';
-import 'package:my_app/ui/widgets/ripple.dart';
 
 List<String> items = [
   "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-qbCmdpCG8m5YwrGGHSvd0ghiNXAj-IOoiA&usqp=CAU",
@@ -15,11 +9,8 @@ List<String> items = [
   "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-qbCmdpCG8m5YwrGGHSvd0ghiNXAj-IOoiA&usqp=CAU",
 ];
 
-class ReviewViewsTab extends StatelessWidget {
-  final double paddingBottom;
-
-  const ReviewViewsTab({Key? key, required this.paddingBottom})
-      : super(key: key);
+class ReviewTab extends StatelessWidget {
+  const ReviewTab({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -87,7 +78,7 @@ class ItemReview extends StatelessWidget {
             backgroundImage: NetworkImage(avatarUrl),
             radius: 24.0,
           ),
-          SizedBox(width: 16.0),
+          const SizedBox(width: 16.0),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
