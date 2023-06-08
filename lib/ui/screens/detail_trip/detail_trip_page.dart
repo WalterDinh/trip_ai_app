@@ -26,14 +26,14 @@ final List<PlanTabBarItem> myTabs = [
   PlanTabBarItem('Reviews', const ReviewTab()),
 ];
 
-class CreatePlanTripScreen extends StatefulWidget {
-  const CreatePlanTripScreen({super.key});
+class DetailTripScreen extends StatefulWidget {
+  const DetailTripScreen({super.key});
 
   @override
-  State<StatefulWidget> createState() => _CreatePlanTripScreenState();
+  State<StatefulWidget> createState() => _DetailTripScreenState();
 }
 
-class _CreatePlanTripScreenState extends State<CreatePlanTripScreen>
+class _DetailTripScreenState extends State<DetailTripScreen>
     with TickerProviderStateMixin {
   late AppLocalizations appLocalization;
   late TabController tabController;
@@ -108,27 +108,27 @@ class _CreatePlanTripScreenState extends State<CreatePlanTripScreen>
       padding: const EdgeInsets.symmetric(horizontal: AppValues.largePadding),
       child: Row(
         children: [
+          // Expanded(
+          //     child: Container(
+          //         margin: const EdgeInsets.only(bottom: 32.0),
+          //         child: ElevatedButton(
+          //             style:
+          //                 ElevatedButtonThemeApp.lightElevatedButtonTheme.style,
+          //             onPressed: () {
+          //               return;
+          //             },
+          //             child: const Text('Reroll Trip')))),
+          // const SizedBox(
+          //   width: AppValues.extraLargePadding,
+          // ),
           Expanded(
               child: Container(
                   margin: const EdgeInsets.only(bottom: 32.0),
                   child: ElevatedButton(
-                      style:
-                          ElevatedButtonThemeApp.lightElevatedButtonTheme.style,
                       onPressed: () {
                         return;
                       },
-                      child: const Text('Reroll Trip')))),
-          const SizedBox(
-            width: AppValues.extraLargePadding,
-          ),
-          Expanded(
-              child: Container(
-                  margin: const EdgeInsets.only(bottom: 32.0),
-                  child: ElevatedButton(
-                      onPressed: () {
-                        return;
-                      },
-                      child: const Text('Continue')))),
+                      child: const Text('Create trip')))),
         ],
       ),
     );

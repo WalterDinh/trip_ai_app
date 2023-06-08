@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:my_app/configs/colors.dart';
-import 'package:my_app/core/extensions/extension.dart';
 import 'package:my_app/core/values/app_values.dart';
 import 'package:my_app/ui/widgets/cache_image.dart';
 import 'package:my_app/ui/widgets/ripple.dart';
+import 'package:my_app/ui/widgets/spacer.dart';
 
 List<String> items = [
-  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwhXMb64tBUSdWO9On_KzwF-HByBM3VjrBkg&usqp=CAU",
-  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwhXMb64tBUSdWO9On_KzwF-HByBM3VjrBkg&usqp=CAU",
   "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwhXMb64tBUSdWO9On_KzwF-HByBM3VjrBkg&usqp=CAU",
   "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwhXMb64tBUSdWO9On_KzwF-HByBM3VjrBkg&usqp=CAU",
   "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwhXMb64tBUSdWO9On_KzwF-HByBM3VjrBkg&usqp=CAU",
@@ -16,26 +14,34 @@ List<String> items = [
 ];
 
 class OverViewTab extends StatelessWidget {
-  final double paddingBottom;
+  const OverViewTab(
+      {Key? key,
+      required this.content,
+      required this.budget,
+      required this.totalCity,
+      required this.totalDays,
+      this.listPhoto})
+      : super(key: key);
 
-  const OverViewTab({Key? key, required this.paddingBottom}) : super(key: key);
+  final String content;
+  final String budget;
+  final int totalCity;
+  final int totalDays;
+  final List<String>? listPhoto;
 
   @override
   Widget build(BuildContext context) {
-    double paddingBottom = MediaQuery.of(context).padding.bottom + 64;
-
     return CustomScrollView(primary: true, slivers: <Widget>[
       SliverToBoxAdapter(
           child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 32.0),
         child: Column(
           children: [
-            const Center(
-              child: Text(
-                  'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.'),
+            Center(
+              child: Text(content),
             ),
             basicInfo(context),
-            activity(context),
+            photos(context),
           ],
         ),
       ))
@@ -49,7 +55,7 @@ class OverViewTab extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              '\$700',
+              '\$$budget',
               style: Theme.of(context).textTheme.headlineLarge,
             ),
             _itemLeftBasicInfo(context),
@@ -57,10 +63,13 @@ class OverViewTab extends StatelessWidget {
         ));
   }
 
-  Widget activity(BuildContext context) {
+  Widget photos(BuildContext context) {
+    double listImageHeight = 380;
+
     return SizedBox(
-      height: 408,
+      height: listImageHeight,
       child: MasonryGridView.count(
+        padding: const EdgeInsets.symmetric(vertical: 16),
         itemCount: items.length,
         crossAxisCount: 2,
         mainAxisSpacing: 8,
@@ -78,11 +87,14 @@ class OverViewTab extends StatelessWidget {
   }
 
   Widget itemPhoto(BuildContext context, int index) {
+    double smallImageHeight = 150;
+    double bigImageHeight = 200;
+
     return Stack(
       alignment: Alignment.center,
       children: [
         SizedBox(
-            height: index % 2 == 0 ? 200 : 150,
+            height: index % 2 == 0 ? bigImageHeight : smallImageHeight,
             child: ClipRRect(
                 borderRadius: const BorderRadius.all(
                     Radius.circular(AppValues.radius_12)),
@@ -92,7 +104,7 @@ class OverViewTab extends StatelessWidget {
             child: Positioned(
                 child: Container(
               width: double.infinity,
-              height: 200,
+              height: smallImageHeight,
               decoration: BoxDecoration(
                   color: AppColors.backgroundBlackOpacity200,
                   borderRadius: const BorderRadius.all(
@@ -122,32 +134,28 @@ class OverViewTab extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 32.0, vertical: 8.0),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Row(
-          children: const [
-            Icon(
+          children: [
+            const Icon(
               Icons.calendar_month_rounded,
               color: AppColors.whiteGrey,
             ),
-            SizedBox(
-              width: AppValues.padding_4,
-            ),
+            const HSpacer(AppValues.padding_4),
             Text(
-              '5 Days',
-              style: TextStyle(color: AppColors.whiteGrey),
+              '$totalDays Days',
+              style: const TextStyle(color: AppColors.whiteGrey),
             )
           ],
         ),
         Row(
-          children: const [
-            Icon(
+          children: [
+            const Icon(
               Icons.location_city,
               color: AppColors.whiteGrey,
             ),
-            SizedBox(
-              width: AppValues.padding_4,
-            ),
+            const HSpacer(AppValues.padding_4),
             Text(
-              '2 Cities',
-              style: TextStyle(color: AppColors.whiteGrey),
+              '$totalCity Cities',
+              style: const TextStyle(color: AppColors.whiteGrey),
             )
           ],
         )
