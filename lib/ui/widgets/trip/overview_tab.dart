@@ -104,7 +104,7 @@ class OverViewTab extends StatelessWidget {
             child: Positioned(
                 child: Container(
               width: double.infinity,
-              height: smallImageHeight,
+              height: bigImageHeight,
               decoration: BoxDecoration(
                   color: AppColors.backgroundBlackOpacity200,
                   borderRadius: const BorderRadius.all(

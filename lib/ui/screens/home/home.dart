@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:my_app/configs/colors.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:my_app/configs/images.dart';
 import 'package:my_app/core/base/base_widget_mixin.dart';
 import 'package:my_app/core/base/base_widget_screen_mixin.dart';
 import 'package:my_app/core/values/app_values.dart';
@@ -49,6 +51,10 @@ class _HomeScreenState extends State<HomeScreen> with BaseState {
     AppNavigator.push(Routes.search_trip);
   }
 
+  void onNavigateToSetting() {
+    AppNavigator.push(Routes.setting);
+  }
+
   @override
   Widget body(BuildContext context) {
     double aspectRatio = 310 / 210;
@@ -67,20 +73,28 @@ class _HomeScreenState extends State<HomeScreen> with BaseState {
           Padding(
             padding: const EdgeInsets.symmetric(
                 horizontal: AppValues.extraLargePadding),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("Hello Sina",
-                    style: Theme.of(context)
-                        .textTheme
-                        .titleLarge!
-                        .copyWith(color: AppColors.textColorGreyDark)),
-                Text("Buy Your favorite desk",
-                    style: Theme.of(context)
-                        .textTheme
-                        .titleLarge!
-                        .copyWith(color: AppColors.textColorGreyDark)),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text("Hello Sina",
+                        style: Theme.of(context)
+                            .textTheme
+                            .titleLarge!
+                            .copyWith(color: AppColors.black)),
+                    Text("Where do you want to go?",
+                        style: Theme.of(context)
+                            .textTheme
+                            .titleLarge!
+                            .copyWith(color: AppColors.black)),
+                  ],
+                ),
+                Ripple(
+                    onTap: onNavigateToSetting,
+                    child: SvgPicture.asset(AppImages.settingIcon))
               ],
             ),
           ),
