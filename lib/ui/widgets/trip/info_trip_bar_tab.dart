@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/configs/colors.dart';
 import 'package:my_app/ui/widgets/ripple.dart';
+import 'package:my_app/ui/widgets/spacer.dart';
 
 class PlanTabBarItem {
   final String label;
@@ -41,24 +42,29 @@ class _InfoTripBarTabState extends State<InfoTripBarTab> {
                 children: widget.myTabs.asMap().entries.map((e) {
               bool isActive = activeIndex == e.key;
 
-              return Ripple(
-                onTap: () => onChangeTab(e.key),
-                child: Container(
-                  margin: const EdgeInsets.only(right: 16),
-                  padding: EdgeInsets.symmetric(
-                      horizontal: isActive ? 16 : 0, vertical: 8),
-                  decoration: isActive
-                      ? BoxDecoration(
-                          color: Theme.of(context).primaryColor,
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(6)))
-                      : null,
-                  child: Text(
-                    e.value.label,
-                    style: TextStyle(
-                        color: isActive ? Colors.white : AppColors.blueGrey),
+              return Row(
+                children: [
+                  Ripple(
+                    onTap: () => onChangeTab(e.key),
+                    child: Container(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: isActive ? 16 : 0, vertical: 8),
+                      decoration: isActive
+                          ? BoxDecoration(
+                              color: Theme.of(context).primaryColor,
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(6)))
+                          : null,
+                      child: Text(
+                        e.value.label,
+                        style: TextStyle(
+                            color:
+                                isActive ? Colors.white : AppColors.blueGrey),
+                      ),
+                    ),
                   ),
-                ),
+                  const HSpacer(16)
+                ],
               );
             }).toList())));
   }

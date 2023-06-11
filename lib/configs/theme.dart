@@ -17,7 +17,6 @@ class Theming {
     outlinedButtonTheme: OutlinedButtonThemeApp.dartOutlinedButtonTheme,
     elevatedButtonTheme: ElevatedButtonThemeApp.dartElevatedButtonTheme,
     scaffoldBackgroundColor: AppColors.black,
-    bottomAppBarColor: AppColors.darkGreen,
     focusColor: AppColors.whiteGrey,
     hintColor: AppColors.conch,
     colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.blue).copyWith(
@@ -38,7 +37,6 @@ class Theming {
     elevatedButtonTheme: ElevatedButtonThemeApp.lightElevatedButtonTheme,
     textTheme: TextThemeApp.lightTextTheme,
     scaffoldBackgroundColor: AppColors.lightGrey,
-    bottomAppBarColor: AppColors.darkGreen,
     disabledColor: AppColors.grey,
     colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.blue).copyWith(
         background: AppColors.whiteGrey, brightness: Brightness.light),
