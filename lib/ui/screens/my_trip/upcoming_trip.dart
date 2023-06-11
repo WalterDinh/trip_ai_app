@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/configs/images.dart';
+import 'package:my_app/routes.dart';
+import 'package:my_app/ui/screens/my_trip/my_trip.dart';
+import 'package:my_app/ui/screens/my_trip/widgets/item_show_more_trip.dart';
 import 'package:my_app/ui/screens/my_trip/widgets/item_my_trip.dart';
 import 'package:my_app/ui/widgets/spacer.dart';
 
@@ -20,10 +23,20 @@ class _UpcomingTripScreenState extends State<UpcomingTripScreen> {
             height: double.infinity,
             child: PageView.builder(
               controller: PageController(),
-              itemCount: 5,
+              itemCount: images.length,
               itemBuilder: (context, index) {
-              return ItemMyTrip(image: images[index]);
-            },),
+                AssetImage image = images[index];
+
+                return index > images.length - 2
+                    ? ItemShowMoreTrip(
+                        image: image,
+                        onTap: () {
+                          AppNavigator.push(Routes.more_trip, MyTrip.upcoming_trip);
+                        },
+                      )
+                    : ItemMyTrip(image: image);
+              },
+            ),
           ),
         ),
         const VSpacer(24)

@@ -3,9 +3,13 @@ import 'package:my_app/configs/colors.dart';
 import 'package:my_app/core/base/base_widget_screen_mixin.dart';
 import 'package:my_app/ui/screens/my_trip/old_trip.dart';
 import 'package:my_app/ui/screens/my_trip/upcoming_trip.dart';
-import 'package:my_app/ui/widgets/main_app_bar.dart';
 import 'package:my_app/ui/widgets/ripple.dart';
 import 'package:my_app/ui/widgets/spacer.dart';
+
+class MyTrip {
+  static const upcoming_trip = 0;
+  static const old_trip = 1;
+}
 
 final List<Widget> _pages = [const UpcomingTripScreen(), const OldTripScreen()];
 
@@ -23,7 +27,7 @@ class _MyTripScreenState extends State<MyTripScreen> with BaseState {
   Widget body(BuildContext context) {
     return Column(
       children: [
-        _buildRowAddFriendAndFollow(),
+        _topTabBar(),
         Expanded(
           child: SizedBox(
             height: double.infinity,
@@ -38,65 +42,78 @@ class _MyTripScreenState extends State<MyTripScreen> with BaseState {
     );
   }
 
-  Widget _buildRowAddFriendAndFollow() {
+  Widget _topTabBar() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 16),
       child: Row(
         children: [
           Expanded(
-            child: _buildButtonAddFriend(),
+            child: _tabUpcomingTrip(),
           ),
           const HSpacer(16),
           Expanded(
-            child: _buildButtonFollow(),
+            child: _tabOldTrip(),
           )
         ],
       ),
     );
   }
 
-  Widget _buildButtonFollow() {
+  Widget _tabOldTrip() {
+    const double tabHeight = 40;
+
     return Ripple(
         onTap: () {
           setState(() {
-            currentPage = 1;
+            currentPage = MyTrip.old_trip;
           });
         },
         child: Container(
-          height: 40,
+          height: tabHeight,
           decoration: BoxDecoration(
-              color: Colors.white,
-              border: Border.all(color: AppColors.darkGreen),
+              color: _isUpcomingTab() ? Colors.white : AppColors.darkGreen,
+              border: _isUpcomingTab()
+                  ? Border.all(color: AppColors.darkGreen)
+                  : null,
               borderRadius: BorderRadius.circular(10)),
-          child: const Center(
+          child: Center(
             child: Text(
               'Chuyến đi cũ',
               style: TextStyle(
-                  color: AppColors.darkGreen, fontWeight: FontWeight.w400),
+                  color: _isUpcomingTab() ? AppColors.darkGreen : Colors.white,
+                  fontWeight: FontWeight.w400),
             ),
           ),
         ));
   }
 
-  Widget _buildButtonAddFriend() {
+  Widget _tabUpcomingTrip() {
+    const double tabHeight = 40;
+
     return Ripple(
         onTap: () {
           setState(() {
-            currentPage = 0;
+            currentPage = MyTrip.upcoming_trip;
           });
         },
         child: Container(
-          height: 40,
+          height: tabHeight,
           decoration: BoxDecoration(
-              color: AppColors.darkGreen,
+              color: _isUpcomingTab() ? AppColors.darkGreen : Colors.white,
+              border: _isUpcomingTab()
+                  ? null
+                  : Border.all(color: AppColors.darkGreen),
               borderRadius: BorderRadius.circular(10)),
-          child: const Center(
+          child: Center(
             child: Text(
               'Chuyến đi sắp tới',
-              style:
-                  TextStyle(color: Colors.white, fontWeight: FontWeight.w400),
+              style: TextStyle(
+                  color: _isUpcomingTab() ? Colors.white : AppColors.darkGreen,
+                  fontWeight: FontWeight.w400),
             ),
           ),
         ));
   }
+
+  bool _isUpcomingTab() => currentPage == MyTrip.upcoming_trip;
 }

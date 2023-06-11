@@ -10,6 +10,7 @@ import 'package:my_app/ui/screens/create_trip_form/create_trip_form_page.dart';
 import 'package:my_app/ui/screens/home/home.dart';
 import 'package:my_app/ui/screens/login/login_page.dart';
 import 'package:my_app/ui/screens/main/main_app.dart';
+import 'package:my_app/ui/screens/more_trip/more_trip.dart';
 import 'package:my_app/ui/screens/notification_detail/notification_detail.dart';
 import 'package:my_app/ui/screens/personal_info/personal_info.dart';
 import 'package:my_app/ui/screens/search_trip/search_trip_page.dart';
@@ -29,7 +30,8 @@ enum Routes {
   create_trip_form,
   create_plan_trip,
   detail_trip,
-  search_trip
+  search_trip,
+  more_trip
 }
 
 class _Paths {
@@ -46,6 +48,7 @@ class _Paths {
   static const String create_plan_trip = '/create_plan_trip';
   static const String detail_trip = '/detail_trip';
   static const String search_trip = '/search_trip';
+  static const String more_trip = '/more_trip';
 
   static const Map<Routes, String> _pathMap = {
     Routes.splash: _Paths.splash,
@@ -61,6 +64,7 @@ class _Paths {
     Routes.create_plan_trip: _Paths.create_plan_trip,
     Routes.detail_trip: _Paths.detail_trip,
     Routes.search_trip: _Paths.search_trip,
+    Routes.more_trip: _Paths.more_trip,
   };
 
   static String of(Routes route) => _pathMap[route] ?? splash;
@@ -100,6 +104,9 @@ class AppNavigator {
         return FadeRoute(page: const FriendsScreen());
       case _Paths.detail_trip:
         return FadeRoute(page: const DetailTripScreen());
+      case _Paths.more_trip:
+        final args = settings.arguments as int;
+        return FadeRoute(page: MoreTripScreen(from: args));
       default:
         return FadeRoute(page: const WelcomeScreen());
     }
