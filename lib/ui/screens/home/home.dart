@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:my_app/configs/colors.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:my_app/core/base/base_widget_mixin.dart';
+import 'package:my_app/core/base/base_widget_screen_mixin.dart';
 import 'package:my_app/core/values/app_values.dart';
 import 'package:my_app/routes.dart';
 import 'package:my_app/ui/widgets/ripple.dart';
@@ -22,9 +23,7 @@ class HomeScreen extends StatefulWidget {
   State<StatefulWidget> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
-  late AppLocalizations appLocalization;
-
+class _HomeScreenState extends State<HomeScreen> with BaseState {
   bool showTitle = false;
 
   @override
@@ -37,12 +36,21 @@ class _HomeScreenState extends State<HomeScreen> {
     super.dispose();
   }
 
+  @override
+  PreferredSizeWidget? appBar(BuildContext context) {
+    return null;
+  }
+
   void onNavigateToDetail(int id) {
     AppNavigator.push(Routes.detail_trip);
   }
 
+  void onNavigateToSearch() {
+    AppNavigator.push(Routes.search_trip);
+  }
+
   @override
-  Widget build(BuildContext context) {
+  Widget body(BuildContext context) {
     double aspectRatio = 310 / 210;
 
     double heightCard =
@@ -50,45 +58,41 @@ class _HomeScreenState extends State<HomeScreen> {
             AppValues.extraSmallPadding;
     double heightCategory = MediaQuery.of(context).size.width * 0.22 + 70;
 
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: SizedBox(
-        height: double.infinity,
-        child: SingleChildScrollView(
-          child:
-              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            VSpacer(MediaQuery.of(context).padding.top),
-            const VSpacer(AppValues.largeMargin),
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                  horizontal: AppValues.extraLargePadding),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Text("Hello Sina",
-                      style: Theme.of(context)
-                          .textTheme
-                          .titleLarge!
-                          .copyWith(color: AppColors.textColorGreyDark)),
-                  Text("Buy Your favorite desk",
-                      style: Theme.of(context)
-                          .textTheme
-                          .titleLarge!
-                          .copyWith(color: AppColors.textColorGreyDark)),
-                ],
-              ),
+    return SizedBox(
+      height: double.infinity,
+      child: SingleChildScrollView(
+        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          VSpacer(MediaQuery.of(context).padding.top),
+          const VSpacer(AppValues.largeMargin),
+          Padding(
+            padding: const EdgeInsets.symmetric(
+                horizontal: AppValues.extraLargePadding),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Text("Hello Sina",
+                    style: Theme.of(context)
+                        .textTheme
+                        .titleLarge!
+                        .copyWith(color: AppColors.textColorGreyDark)),
+                Text("Buy Your favorite desk",
+                    style: Theme.of(context)
+                        .textTheme
+                        .titleLarge!
+                        .copyWith(color: AppColors.textColorGreyDark)),
+              ],
             ),
-            _searchBar(),
-            tabBar(),
-            ListRecommend(heightCard, (id) => onNavigateToDetail(id)),
-            const SizedBox(
-              height: AppValues.largePadding,
-            ),
-            ListCategory(heightCategory: heightCategory),
-            VSpacer(MediaQuery.of(context).padding.bottom),
-          ]),
-        ),
+          ),
+          _searchBar(),
+          tabBar(),
+          ListRecommend(heightCard, (id) => onNavigateToDetail(id)),
+          const SizedBox(
+            height: AppValues.largePadding,
+          ),
+          ListCategory(heightCategory: heightCategory),
+          VSpacer(MediaQuery.of(context).padding.bottom),
+        ]),
       ),
     );
   }
@@ -97,6 +101,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Padding(
       padding: const EdgeInsets.all(AppValues.extraLargePadding),
       child: TextField(
+        onTap: onNavigateToSearch,
         decoration: InputDecoration(
             hintText: 'Search',
             hintStyle: Theme.of(context)

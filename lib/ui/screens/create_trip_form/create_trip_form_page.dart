@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:my_app/configs/colors.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:my_app/core/base/base_widget_screen_mixin.dart';
 import 'package:my_app/core/values/app_values.dart';
 import 'package:my_app/routes.dart';
 import 'package:my_app/ui/widgets/input/simple_text_form_field.dart';
@@ -17,8 +18,8 @@ class CreateTripFormScreen extends StatefulWidget {
   State<StatefulWidget> createState() => _CreateTripFormScreenState();
 }
 
-class _CreateTripFormScreenState extends State<CreateTripFormScreen> {
-  late AppLocalizations appLocalization;
+class _CreateTripFormScreenState extends State<CreateTripFormScreen>
+    with BaseState {
   final SimpleTextFormFieldController textNameTripController =
       SimpleTextFormFieldController();
   final SimpleTextFormFieldController textFormController =
@@ -54,58 +55,53 @@ class _CreateTripFormScreenState extends State<CreateTripFormScreen> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-        ),
-        backgroundColor: AppColors.whiteGrey,
-        body: SizedBox(
-          height: double.infinity,
-          child: SingleChildScrollView(
-              child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                  margin: const EdgeInsets.symmetric(
-                      horizontal: AppValues.margin_18),
-                  child: Text(
-                    'Create trip',
-                    style: Theme.of(context).textTheme.headlineMedium,
-                    textAlign: TextAlign.start,
-                  )),
-              Container(
-                margin: const EdgeInsets.all(AppValues.margin_18),
-                child: Column(
-                  children: [
-                    boxInput(),
-                    const VSpacer(AppValues.margin_40),
-                  ],
-                ),
-              ),
-              const SizedBox(
-                height: AppValues.largePadding,
-              )
-            ],
-          )),
-        ),
-        bottomNavigationBar: Container(
-            decoration: BoxDecoration(color: Colors.white, boxShadow: [
-              BoxShadow(
-                color: AppColors.darkGrey.withOpacity(0.2),
-                offset: const Offset(3, 0),
-                blurRadius: 10,
-              )
-            ]),
-            padding: const EdgeInsets.all(24),
-            child: ElevatedButton(
-                statesController: MaterialStatesController(),
-                onPressed: onCreate,
-                child: Text('Continue',
-                    style: Theme.of(context).textTheme.labelMedium!.copyWith(
-                          color: AppColors.whiteGrey,
-                        )))));
+  Widget screenName() {
+    return const Text("Create trip");
+  }
+
+  @override
+  Widget bottomNavigationBar() {
+    return Container(
+        decoration: BoxDecoration(color: Colors.white, boxShadow: [
+          BoxShadow(
+            color: AppColors.darkGrey.withOpacity(0.2),
+            offset: const Offset(3, 0),
+            blurRadius: 10,
+          )
+        ]),
+        padding: const EdgeInsets.all(24),
+        child: ElevatedButton(
+            statesController: MaterialStatesController(),
+            onPressed: onCreate,
+            child: Text('Continue',
+                style: Theme.of(context).textTheme.labelMedium!.copyWith(
+                      color: AppColors.whiteGrey,
+                    ))));
+  }
+
+  @override
+  Widget body(BuildContext context) {
+    return SizedBox(
+      height: double.infinity,
+      child: SingleChildScrollView(
+          child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            margin: const EdgeInsets.all(AppValues.margin_18),
+            child: Column(
+              children: [
+                boxInput(),
+                const VSpacer(AppValues.margin_40),
+              ],
+            ),
+          ),
+          const SizedBox(
+            height: AppValues.largePadding,
+          )
+        ],
+      )),
+    );
   }
 
   Widget boxInput() {
