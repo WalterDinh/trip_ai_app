@@ -23,4 +23,5 @@ class AppImages {
   static const heartIcon = '$_imagePath/ic_heart.svg';
   static const shareIcon = '$_imagePath/ic_share.svg';
   static const circleAddIcon = '$_imagePath/ic_add_circle.svg';
+  static const settingIcon = '$_imagePath/ic_setting.svg';
 }
