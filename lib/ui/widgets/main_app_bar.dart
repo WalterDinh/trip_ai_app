@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:my_app/routes.dart';
 import 'package:my_app/utils/size.dart';
 
@@ -94,19 +95,26 @@ class MainSliverAppBar extends SliverAppBar {
 }
 
 class MainAppBar extends AppBar {
-  MainAppBar({Widget? title, IconData? rightIcon})
+  MainAppBar(
+      {Widget? title, IconData? rightIcon, bool? showIconBack, Widget? leading})
       : super(
           title: title,
           backgroundColor: Colors.transparent,
           elevation: 0,
-          leading: const IconButton(
-            padding: EdgeInsets.symmetric(horizontal: mainAppbarPadding),
-            icon: Icon(Icons.arrow_back),
-            onPressed: AppNavigator.pop,
+          systemOverlayStyle: const SystemUiOverlayStyle(
+            statusBarIconBrightness:
+                Brightness.dark, //<-- For Android SEE HERE (dark icons)
+            statusBarBrightness:
+                Brightness.light, //<-- For iOS SEE HERE (dark icons)
           ),
+          leading: showIconBack == true
+              ? const BackButton(
+                  color: Colors.black, // <-- SEE HERE
+                )
+              : leading,
           actions: <Widget>[
             Padding(
-              padding: EdgeInsets.only(right: mainAppbarPadding),
+              padding: const EdgeInsets.only(right: mainAppbarPadding),
               child: Icon(
                 rightIcon,
                 color: Colors.white,

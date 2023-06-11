@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:my_app/configs/colors.dart';
 import 'package:my_app/configs/images.dart';
+import 'package:my_app/core/base/base_widget_screen_mixin.dart';
 import 'package:my_app/core/values/app_values.dart';
 import 'package:my_app/routes.dart';
 import 'package:my_app/ui/widgets/input/simple_text_form_field.dart';
+import 'package:my_app/ui/widgets/main_app_bar.dart';
 import 'package:my_app/ui/widgets/ripple.dart';
 import 'package:my_app/ui/widgets/spacer.dart';
 
@@ -15,7 +17,7 @@ class LoginScreen extends StatefulWidget {
   State<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _LoginScreenState extends State<LoginScreen> with BaseState {
   final SimpleTextFormFieldController textEmailController =
       SimpleTextFormFieldController();
   final SimpleTextFormFieldController textPasswordController =
@@ -39,7 +41,8 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void onLogin() async {
-    AppNavigator.push(Routes.main);
+    AppNavigator.popToTop();
+    AppNavigator.replaceWith(Routes.main);
   }
 
   @override
@@ -49,7 +52,12 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  PreferredSizeWidget? appBar(BuildContext context) {
+    return null;
+  }
+
+  @override
+  Widget body(BuildContext context) {
     double buttonWidth = MediaQuery.of(context).size.width / 2;
 
     return Scaffold(
@@ -139,10 +147,9 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
           ),
-          AppBar(
-            backgroundColor: Colors.transparent,
-            elevation: 0,
-          ),
+          MainAppBar(
+            leading: const BackButton(color: Colors.white),
+          )
         ],
       ),
     );

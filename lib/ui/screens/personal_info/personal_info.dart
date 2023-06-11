@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:my_app/configs/colors.dart';
 import 'package:my_app/configs/images.dart';
+import 'package:my_app/core/base/base_widget_screen_mixin.dart';
 import 'package:my_app/ui/screens/personal_info/widgets/item_info.dart';
 import 'package:my_app/ui/widgets/cache_image.dart';
 import 'package:my_app/ui/widgets/elevated_container.dart';
@@ -16,25 +17,22 @@ class PersonalInfoScreen extends StatefulWidget {
   State<PersonalInfoScreen> createState() => _PersonalInfoScreenState();
 }
 
-class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
+class _PersonalInfoScreenState extends State<PersonalInfoScreen>
+    with BaseState {
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: MainAppBar(),
-      body: SingleChildScrollView(
-        physics: const BouncingScrollPhysics(),
-        child: Column(
-          children: [
-            _personalInfoContainer(),
-            const VSpacer(24),
-            _personalInfo1(),
-            const VSpacer(16),
-            _personalInfo2(),
-            const VSpacer(16),
-            VSpacer(MediaQuery.of(context).padding.bottom)
-          ],
-        ),
+  Widget body(BuildContext context) {
+    return SingleChildScrollView(
+      physics: const BouncingScrollPhysics(),
+      child: Column(
+        children: [
+          _personalInfoContainer(),
+          const VSpacer(24),
+          _personalInfo1(),
+          const VSpacer(16),
+          _personalInfo2(),
+          const VSpacer(16),
+          VSpacer(MediaQuery.of(context).padding.bottom)
+        ],
       ),
     );
   }

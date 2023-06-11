@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/configs/colors.dart';
+import 'package:my_app/core/base/base_widget_screen_mixin.dart';
 import 'package:my_app/ui/screens/my_trip/old_trip.dart';
 import 'package:my_app/ui/screens/my_trip/upcoming_trip.dart';
 import 'package:my_app/ui/widgets/main_app_bar.dart';
@@ -15,30 +16,25 @@ class MyTripScreen extends StatefulWidget {
   State<MyTripScreen> createState() => _MyTripScreenState();
 }
 
-class _MyTripScreenState extends State<MyTripScreen> {
+class _MyTripScreenState extends State<MyTripScreen> with BaseState {
   int currentPage = 0;
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: MainAppBar(),
-      extendBody: true,
-      body: Column(
-        children: [
-          _buildRowAddFriendAndFollow(),
-          Expanded(
-            child: SizedBox(
-              height: double.infinity,
-              child: IndexedStack(
-                index: currentPage,
-                children: _pages,
-              ),
+  Widget body(BuildContext context) {
+    return Column(
+      children: [
+        _buildRowAddFriendAndFollow(),
+        Expanded(
+          child: SizedBox(
+            height: double.infinity,
+            child: IndexedStack(
+              index: currentPage,
+              children: _pages,
             ),
           ),
-          VSpacer(MediaQuery.of(context).padding.bottom),
-        ],
-      ),
+        ),
+        VSpacer(MediaQuery.of(context).padding.bottom),
+      ],
     );
   }
 
@@ -97,7 +93,8 @@ class _MyTripScreenState extends State<MyTripScreen> {
           child: const Center(
             child: Text(
               'Chuyến đi sắp tới',
-              style: TextStyle(color: Colors.white, fontWeight: FontWeight.w400),
+              style:
+                  TextStyle(color: Colors.white, fontWeight: FontWeight.w400),
             ),
           ),
         ));

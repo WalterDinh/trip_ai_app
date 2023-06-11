@@ -35,7 +35,7 @@ class CustomBottomBar extends StatelessWidget {
           top: 0),
       height: screenWidth * .185,
       decoration: BoxDecoration(
-        color: Theme.of(context).bottomAppBarColor,
+        color: Theme.of(context).primaryColor,
         boxShadow: [
           BoxShadow(
             color: AppColors.elevatedContainerColorOpacity,
