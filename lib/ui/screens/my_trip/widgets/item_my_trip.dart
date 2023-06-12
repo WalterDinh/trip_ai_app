@@ -227,9 +227,9 @@ class ItemMyTrip extends StatelessWidget with BaseWidgetMixin {
         children: const [
           FrostedIconButton(icon: AppImages.heartIcon),
           VSpacer(12),
-          FrostedIconButton(icon: AppImages.heartIcon),
+          FrostedIconButton(icon: AppImages.shareIcon),
           VSpacer(12),
-          FrostedIconButton(icon: AppImages.heartIcon),
+          FrostedIconButton(icon: AppImages.addUserIcon),
         ],
       ),
     );
