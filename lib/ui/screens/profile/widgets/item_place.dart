@@ -2,11 +2,13 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:my_app/configs/colors.dart';
+import 'package:my_app/configs/images.dart';
 import 'package:my_app/core/base/base_widget_mixin.dart';
 import 'package:my_app/core/extensions/extension.dart';
 import 'package:my_app/core/values/app_values.dart';
 import 'package:my_app/ui/widgets/cache_image.dart';
 import 'package:my_app/ui/widgets/elevated_container.dart';
+import 'package:my_app/ui/widgets/frosted_icon_button.dart';
 import 'package:my_app/ui/widgets/stack_avatar_circle.dart';
 
 class ItemPlace extends StatelessWidget with BaseWidgetMixin {
@@ -79,17 +81,14 @@ class ItemPlace extends StatelessWidget with BaseWidgetMixin {
             child: BackdropFilter(
           filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
           child: Container(
-            width: 44,
-            height: 44,
+            width: AppValues.height_44,
+            height: AppValues.height_44,
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: Colors.black.withOpacity(0.1)),
-            child: const IconButton(
-              icon: Icon(
-                Icons.heart_broken,
-                color: Colors.white,
-              ),
-              onPressed: null,
+              borderRadius: BorderRadius.circular(10),
+              color: Colors.black.withOpacity(0.1),
+            ),
+            child: const FrostedIconButton(
+              icon: AppImages.heartIcon,
             ),
           ),
         )));

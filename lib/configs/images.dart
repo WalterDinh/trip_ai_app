@@ -24,4 +24,11 @@ class AppImages {
   static const shareIcon = '$_imagePath/ic_share.svg';
   static const circleAddIcon = '$_imagePath/ic_add_circle.svg';
   static const settingIcon = '$_imagePath/ic_setting.svg';
+  static const cityIcon = '$_imagePath/ic_city.svg';
+  static const countryIcon = '$_imagePath/ic_country.svg';
+  static const distanceIcon = '$_imagePath/ic_distance.svg';
+  static const tripCountIcon = '$_imagePath/ic_trip_count.svg';
+  static const outlineAddIcon = '$_imagePath/ic_add_outline.svg';
+  static const outlineCheckIcon = '$_imagePath/ic_check_outline.svg';
+  static const addUserIcon = '$_imagePath/ic_add_user.svg';
 }

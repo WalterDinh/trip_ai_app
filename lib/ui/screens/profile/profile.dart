@@ -12,7 +12,6 @@ import 'package:my_app/ui/screens/profile/sections/chart_statistic.dart';
 import 'package:my_app/ui/screens/profile/sections/list_favorite_place.dart';
 import 'package:my_app/ui/screens/profile/widgets/card_statistic.dart';
 import 'package:my_app/ui/widgets/cache_image.dart';
-import 'package:my_app/ui/widgets/main_app_bar.dart';
 import 'package:my_app/ui/widgets/ripple.dart';
 import 'package:my_app/ui/widgets/spacer.dart';
 
@@ -31,6 +30,8 @@ class _ProfileScreenState extends State<ProfileScreen> with BaseState {
 
   @override
   Widget body(BuildContext context) {
+    double chartHeight = 170;
+
     return SafeArea(
       child: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
@@ -46,47 +47,19 @@ class _ProfileScreenState extends State<ProfileScreen> with BaseState {
             ),
             const VSpacer(16),
             Container(
-              height: 170,
+              height: chartHeight,
               margin: const EdgeInsets.symmetric(horizontal: 50),
               child: ChartStatistic(),
             ),
             const VSpacer(24),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  Expanded(
-                    child: StatisticCard(
-                        text: '14 Thanh Pho', iconName: AppImages.addIcon),
-                  ),
-                  HSpacer(16),
-                  Expanded(
-                    child: StatisticCard(
-                        text: '8 Quoc Gia', iconName: AppImages.addIcon),
-                  ),
-                ],
-              ),
+              child: _statisticCardsRowTop(),
             ),
             const VSpacer(14),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  Expanded(
-                    child: StatisticCard(
-                        text: '4000 Km', iconName: AppImages.addIcon),
-                  ),
-                  HSpacer(16),
-                  Expanded(
-                    child: StatisticCard(
-                        text: '5 Chuyen Di', iconName: AppImages.addIcon),
-                  ),
-                ],
-              ),
+              child: _statisticCardsRowBottom(),
             ),
             const VSpacer(40),
             const SizedBox(
@@ -97,6 +70,42 @@ class _ProfileScreenState extends State<ProfileScreen> with BaseState {
           ],
         ),
       ),
+    );
+  }
+
+  Row _statisticCardsRowTop() {
+    return Row(
+      mainAxisSize: MainAxisSize.max,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: const [
+        Expanded(
+          child:
+              StatisticCard(text: '14 Thanh Pho', iconName: AppImages.cityIcon),
+        ),
+        HSpacer(16),
+        Expanded(
+          child: StatisticCard(
+              text: '8 Quoc Gia', iconName: AppImages.countryIcon),
+        ),
+      ],
+    );
+  }
+
+  Row _statisticCardsRowBottom() {
+    return Row(
+      mainAxisSize: MainAxisSize.max,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: const [
+        Expanded(
+          child:
+              StatisticCard(text: '4000 Km', iconName: AppImages.distanceIcon),
+        ),
+        HSpacer(16),
+        Expanded(
+          child: StatisticCard(
+              text: '5 Chuyen Di', iconName: AppImages.tripCountIcon),
+        ),
+      ],
     );
   }
 
@@ -121,7 +130,7 @@ class _ProfileScreenState extends State<ProfileScreen> with BaseState {
     return Ripple(
         onTap: null,
         child: Container(
-          height: 40,
+          height: AppValues.height_40,
           decoration: BoxDecoration(
               color: Colors.white,
               border: Border.all(color: AppColors.darkGreen),
@@ -134,8 +143,9 @@ class _ProfileScreenState extends State<ProfileScreen> with BaseState {
                 style: TextStyle(
                     color: AppColors.darkGreen, fontWeight: FontWeight.w400),
               ),
+              const HSpacer(8),
               SvgPicture.asset(
-                AppImages.addIcon,
+                AppImages.outlineCheckIcon,
                 color: AppColors.darkGreen,
                 width: AppValues.iconDefaultSize,
                 height: AppValues.iconDefaultSize,
@@ -149,7 +159,7 @@ class _ProfileScreenState extends State<ProfileScreen> with BaseState {
     return Ripple(
         onTap: null,
         child: Container(
-          height: 40,
+          height: AppValues.height_40,
           decoration: BoxDecoration(
               color: AppColors.darkGreen,
               borderRadius: BorderRadius.circular(10)),
@@ -161,8 +171,9 @@ class _ProfileScreenState extends State<ProfileScreen> with BaseState {
                 style:
                     TextStyle(color: Colors.white, fontWeight: FontWeight.w400),
               ),
+              const HSpacer(8),
               SvgPicture.asset(
-                AppImages.addIcon,
+                AppImages.outlineAddIcon,
                 width: AppValues.iconDefaultSize,
                 height: AppValues.iconDefaultSize,
               )
@@ -172,8 +183,10 @@ class _ProfileScreenState extends State<ProfileScreen> with BaseState {
   }
 
   Widget _buildPersonalInfoContainer() {
+    double height = 210;
+
     return SizedBox(
-      height: 210,
+      height: height,
       child: Stack(fit: StackFit.expand, children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 30),
@@ -226,15 +239,17 @@ class _ProfileScreenState extends State<ProfileScreen> with BaseState {
   }
 
   SizedBox _personalInfoAvatar() {
+    double avatarSize = 88;
+
     return SizedBox(
-      width: 88,
-      height: 88,
+      width: avatarSize,
+      height: avatarSize,
       child: Ripple(
         onTap: () {
           AppNavigator.push(Routes.personal_info);
         },
         child: ClipRRect(
-          borderRadius: BorderRadius.circular(44),
+          borderRadius: BorderRadius.circular(avatarSize / 2),
           child: const CacheImage(
             fit: BoxFit.cover,
             path:
