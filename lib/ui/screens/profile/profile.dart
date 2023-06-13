@@ -9,8 +9,8 @@ import 'package:my_app/core/base/base_widget_screen_mixin.dart';
 import 'package:my_app/core/values/app_values.dart';
 import 'package:my_app/routes.dart';
 import 'package:my_app/ui/screens/profile/sections/chart_statistic.dart';
+import 'package:my_app/ui/screens/profile/sections/grid_card_statistic.dart';
 import 'package:my_app/ui/screens/profile/sections/list_favorite_place.dart';
-import 'package:my_app/ui/screens/profile/widgets/card_statistic.dart';
 import 'package:my_app/ui/widgets/cache_image.dart';
 import 'package:my_app/ui/widgets/ripple.dart';
 import 'package:my_app/ui/widgets/spacer.dart';
@@ -54,12 +54,7 @@ class _ProfileScreenState extends State<ProfileScreen> with BaseState {
             const VSpacer(24),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: _statisticCardsRowTop(),
-            ),
-            const VSpacer(14),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: _statisticCardsRowBottom(),
+              child: GridCardStatistic(items: listCardStatistic),
             ),
             const VSpacer(40),
             const SizedBox(
@@ -70,42 +65,6 @@ class _ProfileScreenState extends State<ProfileScreen> with BaseState {
           ],
         ),
       ),
-    );
-  }
-
-  Row _statisticCardsRowTop() {
-    return Row(
-      mainAxisSize: MainAxisSize.max,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: const [
-        Expanded(
-          child:
-              StatisticCard(text: '14 Thanh Pho', iconName: AppImages.cityIcon),
-        ),
-        HSpacer(16),
-        Expanded(
-          child: StatisticCard(
-              text: '8 Quoc Gia', iconName: AppImages.countryIcon),
-        ),
-      ],
-    );
-  }
-
-  Row _statisticCardsRowBottom() {
-    return Row(
-      mainAxisSize: MainAxisSize.max,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: const [
-        Expanded(
-          child:
-              StatisticCard(text: '4000 Km', iconName: AppImages.distanceIcon),
-        ),
-        HSpacer(16),
-        Expanded(
-          child: StatisticCard(
-              text: '5 Chuyen Di', iconName: AppImages.tripCountIcon),
-        ),
-      ],
     );
   }
 
@@ -273,3 +232,10 @@ class _ProfileScreenState extends State<ProfileScreen> with BaseState {
     );
   }
 }
+
+final listCardStatistic = [
+  StatisticCardModel(AppImages.cityIcon, "14 Thanh Pho"),
+  StatisticCardModel(AppImages.countryIcon, "8 Quoc Gia"),
+  StatisticCardModel(AppImages.distanceIcon, "4000 Km"),
+  StatisticCardModel(AppImages.tripCountIcon, "5 Chuyen Di"),
+];

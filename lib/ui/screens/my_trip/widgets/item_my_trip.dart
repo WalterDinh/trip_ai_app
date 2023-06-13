@@ -3,9 +3,9 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:my_app/configs/colors.dart';
 import 'package:my_app/configs/images.dart';
-import 'package:my_app/configs/theme.dart';
 import 'package:my_app/core/base/base_widget_mixin.dart';
 import 'package:my_app/core/values/app_values.dart';
+import 'package:my_app/ui/screens/my_trip/widgets/item_geo_info.dart';
 import 'package:my_app/ui/widgets/frosted_icon_button.dart';
 import 'package:my_app/ui/widgets/ripple.dart';
 import 'package:my_app/ui/widgets/spacer.dart';
@@ -119,9 +119,9 @@ class ItemMyTrip extends StatelessWidget with BaseWidgetMixin {
           Positioned.fill(
             child: Row(
               children: [
-                _colLocation(context),
-                _colFlightRest(context),
-                _colDestination(context)
+                _colLocation(),
+                _colFlightRest(),
+                _colDestination()
               ],
             ),
           )
@@ -130,26 +130,13 @@ class ItemMyTrip extends StatelessWidget with BaseWidgetMixin {
     );
   }
 
-  Widget _colDestination(context) {
-    return Expanded(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text('Destination',
-              style: TextThemeApp.bodySmallerText
-                  .copyWith(color: AppColors.itemHandleColor)),
-          const VSpacer(4),
-          Text('Landmark 81',
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyMedium!
-                  .copyWith(color: Colors.white)),
-        ],
-      ),
+  Widget _colDestination() {
+    return const Expanded(
+      child: ItemGeoInfo(title: 'Destination', content: 'Landmark 81'),
     );
   }
 
-  Widget _colFlightRest(context) {
+  Widget _colFlightRest() {
     return Expanded(
       child: Container(
         margin: const EdgeInsets.symmetric(vertical: 16),
@@ -159,40 +146,14 @@ class ItemMyTrip extends StatelessWidget with BaseWidgetMixin {
             right: BorderSide(color: Colors.white, width: 1),
           ),
         ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text('Flight Rest',
-                style: TextThemeApp.bodySmallerText
-                    .copyWith(color: AppColors.itemHandleColor)),
-            const VSpacer(4),
-            Text('Sai Gon',
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyMedium!
-                    .copyWith(color: Colors.white)),
-          ],
-        ),
+        child: const ItemGeoInfo(title: 'Flight rest', content: 'Sai Gon'),
       ),
     );
   }
 
-  Widget _colLocation(context) {
-    return Expanded(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text('Location',
-              style: TextThemeApp.bodySmallerText
-                  .copyWith(color: AppColors.itemHandleColor)),
-          const VSpacer(4),
-          Text('VietNam',
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyMedium!
-                  .copyWith(color: Colors.white)),
-        ],
-      ),
+  Widget _colLocation() {
+    return const Expanded(
+      child: ItemGeoInfo(title: 'Location', content: 'Viet Nam'),
     );
   }
 
