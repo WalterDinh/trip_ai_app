@@ -14,14 +14,12 @@ class ReviewTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double paddingBottom = MediaQuery.of(context).padding.bottom + 64;
-
     return CustomScrollView(primary: true, slivers: <Widget>[
       SliverToBoxAdapter(
           child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 32.0),
         child: Column(
-          children: [
+          children: const [
             ItemReview(
               reviewContent: 'Good trip',
               reviewerName: 'Haku',
@@ -52,7 +50,7 @@ class ItemReview extends StatelessWidget {
   final String reviewerName;
   final String reviewContent;
 
-  ItemReview({
+  const ItemReview({
     required this.avatarUrl,
     required this.reviewerName,
     required this.reviewContent,
@@ -61,7 +59,7 @@ class ItemReview extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(16.0),
+      padding: const EdgeInsets.all(16.0),
       decoration: BoxDecoration(
         color: Colors.white,
         border: Border(

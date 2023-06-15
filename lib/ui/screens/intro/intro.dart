@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:my_app/configs/colors.dart';
 import 'package:my_app/configs/images.dart';
@@ -41,7 +43,10 @@ class _IntroScreenState extends State<IntroScreen> {
   @override
   void initState() {
     super.initState();
-    checkData();
+    scheduleMicrotask(() async {
+      await Future.delayed(const Duration(milliseconds: 400));
+      checkData();
+    });
   }
 
   @override
@@ -71,7 +76,7 @@ class _IntroScreenState extends State<IntroScreen> {
         decoration: BoxDecoration(
             color: isSelected
                 ? Theme.of(context).primaryColor
-                : Theme.of(context).disabledColor,
+                : AppColors.darkGrey,
             borderRadius: BorderRadius.circular(5.0)),
       );
     }).toList();

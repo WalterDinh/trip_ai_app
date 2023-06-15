@@ -99,6 +99,7 @@ class MainAppBar extends AppBar {
       {Widget? title, IconData? rightIcon, bool? showIconBack, Widget? leading})
       : super(
           title: title,
+          centerTitle: true,
           backgroundColor: Colors.transparent,
           elevation: 0,
           systemOverlayStyle: const SystemUiOverlayStyle(

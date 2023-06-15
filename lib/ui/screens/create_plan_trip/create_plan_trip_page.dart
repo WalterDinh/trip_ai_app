@@ -133,7 +133,7 @@ class _CreatePlanTripScreenState extends State<CreatePlanTripScreen>
                       onPressed: () {
                         return;
                       },
-                      child: const Text('Continue')))),
+                      child: const Text('Add To Trip')))),
         ],
       ),
     );

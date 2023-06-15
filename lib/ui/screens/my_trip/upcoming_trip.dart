@@ -4,6 +4,7 @@ import 'package:my_app/routes.dart';
 import 'package:my_app/ui/screens/my_trip/my_trip.dart';
 import 'package:my_app/ui/screens/my_trip/widgets/item_show_more_trip.dart';
 import 'package:my_app/ui/screens/my_trip/widgets/item_my_trip.dart';
+import 'package:my_app/ui/widgets/ripple.dart';
 import 'package:my_app/ui/widgets/spacer.dart';
 
 class UpcomingTripScreen extends StatefulWidget {
@@ -14,6 +15,10 @@ class UpcomingTripScreen extends StatefulWidget {
 }
 
 class _UpcomingTripScreenState extends State<UpcomingTripScreen> {
+  void onNavigateToDetail(int id) {
+    AppNavigator.push(Routes.detail_trip);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -31,15 +36,19 @@ class _UpcomingTripScreenState extends State<UpcomingTripScreen> {
                     ? ItemShowMoreTrip(
                         image: image,
                         onTap: () {
-                          AppNavigator.push(Routes.more_trip, MyTrip.upcoming_trip);
+                          AppNavigator.push(
+                              Routes.more_trip, MyTrip.upcoming_trip);
                         },
                       )
-                    : ItemMyTrip(image: image);
+                    : Ripple(
+                        onTap: () => onNavigateToDetail(0),
+                        child: ItemMyTrip(image: image));
               },
             ),
           ),
         ),
-        const VSpacer(24)
+        const VSpacer(24),
+        VSpacer(MediaQuery.of(context).padding.bottom),
       ],
     );
   }

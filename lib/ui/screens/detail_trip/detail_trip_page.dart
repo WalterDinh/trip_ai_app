@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:my_app/configs/colors.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:my_app/configs/theme.dart';
+import 'package:my_app/core/base/base_widget_screen_mixin.dart';
 import 'package:my_app/core/values/app_values.dart';
 import 'package:my_app/routes.dart';
 import 'package:my_app/ui/widgets/spacer.dart';
@@ -34,7 +35,7 @@ class DetailTripScreen extends StatefulWidget {
 }
 
 class _DetailTripScreenState extends State<DetailTripScreen>
-    with TickerProviderStateMixin {
+    with TickerProviderStateMixin, BaseState {
   late AppLocalizations appLocalization;
   late TabController tabController;
   int currentPage = 0;
@@ -56,49 +57,54 @@ class _DetailTripScreenState extends State<DetailTripScreen>
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.whiteGrey,
-      bottomNavigationBar: _rowButton(),
-      extendBody: true,
-      body: DefaultTabController(
-        initialIndex: 1,
-        animationDuration: const Duration(milliseconds: 400),
-        length: 3,
-        child: NestedScrollView(
-          headerSliverBuilder: (context, value) {
-            return [
-              const SliverAppBar(
-                title: Text('Plan'),
-                backgroundColor: Colors.transparent,
-                iconTheme: IconThemeData(color: AppColors.black),
+  bool pageExtendBody() {
+    return true;
+  }
+
+  @override
+  Widget bottomNavigationBar() {
+    return _rowButton();
+  }
+
+  @override
+  Widget screenName() {
+    return const Text("Plan");
+  }
+
+  @override
+  Widget body(BuildContext context) {
+    return DefaultTabController(
+      initialIndex: 1,
+      animationDuration: const Duration(milliseconds: 400),
+      length: 3,
+      child: NestedScrollView(
+        headerSliverBuilder: (context, value) {
+          return [
+            SliverToBoxAdapter(
+                child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 32.0),
+              child: Column(
+                children: [
+                  const BasicInfoPLan(
+                      imageUrl:
+                          'https://www.studytienganh.vn/upload/2021/05/99552.jpeg',
+                      placeName: 'Tokyo',
+                      rating: 4.3,
+                      totalRating: 300),
+                  const VSpacer(8),
+                  InfoTripBarTab(
+                    myTabs: myTabs,
+                    onChangeTab: (key) => tabController.animateTo(key),
+                  ),
+                  const VSpacer(16)
+                ],
               ),
-              SliverToBoxAdapter(
-                  child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 32.0),
-                child: Column(
-                  children: [
-                    const BasicInfoPLan(
-                        imageUrl:
-                            'https://www.studytienganh.vn/upload/2021/05/99552.jpeg',
-                        placeName: 'Tokyo',
-                        rating: 4.3,
-                        totalRating: 300),
-                    const VSpacer(8),
-                    InfoTripBarTab(
-                      myTabs: myTabs,
-                      onChangeTab: (key) => tabController.animateTo(key),
-                    ),
-                    const VSpacer(16)
-                  ],
-                ),
-              ))
-            ];
-          },
-          body: TabBarView(
-              controller: tabController,
-              children: myTabs.map((e) => e.widget).toList()),
-        ),
+            ))
+          ];
+        },
+        body: TabBarView(
+            controller: tabController,
+            children: myTabs.map((e) => e.widget).toList()),
       ),
     );
   }

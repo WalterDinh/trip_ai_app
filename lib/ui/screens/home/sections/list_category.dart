@@ -54,18 +54,18 @@ class ListCategory extends StatelessWidget with BaseWidgetMixin {
                   .headlineSmall!
                   .copyWith(color: Theme.of(context).primaryColor),
             ),
-            Ripple(
-              onTap: () {
-                return;
-              },
-              child: Text(
-                'See all',
-                style: Theme.of(context)
-                    .textTheme
-                    .labelMedium!
-                    .copyWith(color: AppColors.textColorGreyLight),
-              ),
-            )
+            // Ripple(
+            //   onTap: () {
+            //     return;
+            //   },
+            //   child: Text(
+            //     'See all',
+            //     style: Theme.of(context)
+            //         .textTheme
+            //         .labelMedium!
+            //         .copyWith(color: AppColors.textColorGreyLight),
+            //   ),
+            // )
           ],
         ),
       );

@@ -92,7 +92,7 @@ class _SimpleTextFormFieldDatePickerState<T>
   }
 
   void _showModalBottomSheet(BuildContext ctx) {
-    const double bottomSheetHeight = 270;
+    const double bottomSheetHeight = 280;
     const double dataPickerHeight = 220;
 
     showCupertinoModalPopup(
