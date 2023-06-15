@@ -8,6 +8,7 @@ import 'package:my_app/ui/screens/friends/friends.dart';
 import 'package:my_app/ui/screens/create_plan_trip/create_plan_trip_page.dart';
 import 'package:my_app/ui/screens/create_trip_form/create_trip_form_page.dart';
 import 'package:my_app/ui/screens/home/home.dart';
+import 'package:my_app/ui/screens/intro/intro.dart';
 import 'package:my_app/ui/screens/login/login_page.dart';
 import 'package:my_app/ui/screens/main/main_app.dart';
 import 'package:my_app/ui/screens/more_trip/more_trip.dart';
@@ -114,7 +115,7 @@ class AppNavigator {
       case _Paths.setting:
         return FadeRoute(page: const SettingScreen());
       default:
-        return FadeRoute(page: const WelcomeScreen());
+        return FadeRoute(page: const IntroScreen());
     }
   }
 

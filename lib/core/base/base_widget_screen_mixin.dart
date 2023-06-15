@@ -69,8 +69,8 @@ mixin BaseState<T extends StatefulWidget> on State<T> {
     return null;
   }
 
-  Color statusBarColor() {
-    return Colors.red;
+  Color? statusBarColor() {
+    return null;
   }
 
   Widget? screenName() {

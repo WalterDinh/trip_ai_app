@@ -39,7 +39,7 @@ class _ProfileScreenState extends State<ProfileScreen> with BaseState {
           children: [
             const VSpacer(24),
             _buildPersonalInfoContainer(),
-            _buildRowAddFriendAndFollow(),
+            // _buildRowAddFriendAndFollow(),
             const VSpacer(16),
             const Text(
               'Thống kê du lịch của bạn',

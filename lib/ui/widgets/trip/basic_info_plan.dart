@@ -4,6 +4,7 @@ import 'package:my_app/core/base/base_widget_mixin.dart';
 import 'package:my_app/core/extensions/extension.dart';
 import 'package:my_app/core/values/app_values.dart';
 import 'package:my_app/ui/widgets/cache_image.dart';
+import 'package:my_app/ui/widgets/trip/place_info_view.dart';
 
 class BasicInfoPLan extends StatelessWidget with BaseWidgetMixin {
   final String imageUrl;
@@ -28,18 +29,28 @@ class BasicInfoPLan extends StatelessWidget with BaseWidgetMixin {
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 16.0),
-          child: SizedBox(
-            height: heightImage,
-            width: widthImage,
-            child: ClipRRect(
-              borderRadius: const BorderRadius.all(
-                Radius.circular(AppValues.largeRadius),
+          child: Stack(
+            children: [
+              SizedBox(
+                height: heightImage,
+                width: widthImage,
+                child: ClipRRect(
+                  borderRadius: const BorderRadius.all(
+                    Radius.circular(AppValues.largeRadius),
+                  ),
+                  child: CacheImage(
+                    fit: BoxFit.cover,
+                    path: imageUrl,
+                  ),
+                ).fadeAnimation(0.5),
               ),
-              child: CacheImage(
-                fit: BoxFit.cover,
-                path: imageUrl,
-              ),
-            ).fadeAnimation(0.5),
+              Positioned(
+                bottom: 16,
+                right: 20,
+                left: 20,
+                child: PlaceInfoView(),
+              )
+            ],
           ),
         ),
         Padding(

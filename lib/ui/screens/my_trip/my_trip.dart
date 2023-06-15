@@ -11,7 +11,7 @@ class MyTrip {
   static const old_trip = 1;
 }
 
-final List<Widget> _pages = [const UpcomingTripScreen(), const OldTripScreen()];
+final List<Widget> _pages = [const UpcomingTripScreen(), const OldTripPage()];
 
 class MyTripScreen extends StatefulWidget {
   const MyTripScreen({Key? key}) : super(key: key);
@@ -37,7 +37,6 @@ class _MyTripScreenState extends State<MyTripScreen> with BaseState {
             ),
           ),
         ),
-        VSpacer(MediaQuery.of(context).padding.bottom),
       ],
     );
   }

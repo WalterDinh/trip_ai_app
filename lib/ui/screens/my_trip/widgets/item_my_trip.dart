@@ -3,12 +3,12 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:my_app/configs/colors.dart';
 import 'package:my_app/configs/images.dart';
-import 'package:my_app/configs/theme.dart';
 import 'package:my_app/core/base/base_widget_mixin.dart';
 import 'package:my_app/core/values/app_values.dart';
 import 'package:my_app/ui/widgets/frosted_icon_button.dart';
 import 'package:my_app/ui/widgets/ripple.dart';
 import 'package:my_app/ui/widgets/spacer.dart';
+import 'package:my_app/ui/widgets/trip/place_info_view.dart';
 
 class ItemMyTrip extends StatelessWidget with BaseWidgetMixin {
   const ItemMyTrip({super.key, required this.image});
@@ -30,10 +30,10 @@ class ItemMyTrip extends StatelessWidget with BaseWidgetMixin {
           const VSpacer(24),
           _placeName(),
           const VSpacer(8),
-          Align(
-            alignment: AlignmentDirectional.centerEnd,
-            child: _buttonRecreateTrip(),
-          )
+          // Align(
+          //   alignment: AlignmentDirectional.centerEnd,
+          //   child: _buttonRecreateTrip(),
+          // )
         ],
       ),
     );
@@ -109,112 +109,7 @@ class ItemMyTrip extends StatelessWidget with BaseWidgetMixin {
   }
 
   Widget _geoInfo(context) {
-    return Positioned(
-      bottom: 10,
-      left: 10,
-      right: 10,
-      child: Stack(
-        children: [
-          _backdropGeoInfo(),
-          Positioned.fill(
-            child: Row(
-              children: [
-                _colLocation(context),
-                _colFlightRest(context),
-                _colDestination(context)
-              ],
-            ),
-          )
-        ],
-      ),
-    );
-  }
-
-  Widget _colDestination(context) {
-    return Expanded(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text('Destination',
-              style: TextThemeApp.bodySmallerText
-                  .copyWith(color: AppColors.itemHandleColor)),
-          const VSpacer(4),
-          Text('Landmark 81',
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyMedium!
-                  .copyWith(color: Colors.white)),
-        ],
-      ),
-    );
-  }
-
-  Widget _colFlightRest(context) {
-    return Expanded(
-      child: Container(
-        margin: const EdgeInsets.symmetric(vertical: 16),
-        decoration: const BoxDecoration(
-          border: Border(
-            left: BorderSide(color: Colors.white, width: 1),
-            right: BorderSide(color: Colors.white, width: 1),
-          ),
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text('Flight Rest',
-                style: TextThemeApp.bodySmallerText
-                    .copyWith(color: AppColors.itemHandleColor)),
-            const VSpacer(4),
-            Text('Sai Gon',
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyMedium!
-                    .copyWith(color: Colors.white)),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _colLocation(context) {
-    return Expanded(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text('Location',
-              style: TextThemeApp.bodySmallerText
-                  .copyWith(color: AppColors.itemHandleColor)),
-          const VSpacer(4),
-          Text('VietNam',
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyMedium!
-                  .copyWith(color: Colors.white)),
-        ],
-      ),
-    );
-  }
-
-  ClipRRect _backdropGeoInfo() {
-    double height = 76;
-
-    return ClipRRect(
-      borderRadius: const BorderRadius.only(
-        topLeft: Radius.circular(15),
-        topRight: Radius.circular(15),
-        bottomLeft: Radius.circular(20),
-        bottomRight: Radius.circular(20),
-      ),
-      child: BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-        child: Container(
-          width: double.infinity,
-          height: height,
-          decoration: BoxDecoration(color: Colors.black.withOpacity(0.1)),
-        ),
-      ),
-    );
+    return Positioned(bottom: 10, left: 10, right: 10, child: PlaceInfoView());
   }
 
   Widget _buttonActions() {

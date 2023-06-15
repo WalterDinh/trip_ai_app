@@ -22,7 +22,7 @@ class SignUpStep3 extends StatelessWidget {
       SimpleTextFormFieldController();
 
   void onSubmit() async {
-    AppNavigator.push(Routes.home);
+    AppNavigator.push(Routes.login);
   }
 
   @override

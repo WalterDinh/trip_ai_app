@@ -140,6 +140,7 @@ class _SignUpStep1State extends State<SignUpStep1> {
           ),
           AppBar(
             backgroundColor: Colors.transparent,
+            foregroundColor: Colors.white,
             elevation: 0,
           ),
         ],
