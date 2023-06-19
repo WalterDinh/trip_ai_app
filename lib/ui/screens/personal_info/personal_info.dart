@@ -1,9 +1,11 @@
 import 'dart:ui';
 
+import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:my_app/configs/colors.dart';
 import 'package:my_app/configs/images.dart';
 import 'package:my_app/core/base/base_widget_screen_mixin.dart';
+import 'package:my_app/ui/screens/personal_info/modals/gender_modal.dart';
 import 'package:my_app/ui/screens/personal_info/widgets/item_info.dart';
 import 'package:my_app/ui/widgets/cache_image.dart';
 import 'package:my_app/ui/widgets/elevated_container.dart';
@@ -119,15 +121,19 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen>
   Widget _personalInfo1() {
     return ElevatedContainer(
       bgColor: Colors.white,
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      padding: const EdgeInsets.symmetric(vertical: 8),
       margin: const EdgeInsets.symmetric(horizontal: 30),
       child: Column(
-        children: const [
-          ItemInfo(label: 'Số điện thoại', content: '0987654321'),
-          Divider(height: 1, color: AppColors.itemHandleColor),
-          ItemInfo(label: 'Email', content: 'email@email.com'),
-          Divider(height: 1, color: AppColors.itemHandleColor),
-          ItemInfo(label: 'Giới tính', content: 'Nam'),
+        children: [
+          const ItemInfo(label: 'Số điện thoại', content: '0987654321'),
+          const Divider(height: 1, color: AppColors.itemHandleColor),
+          const ItemInfo(label: 'Email', content: 'email@email.com'),
+          const Divider(height: 1, color: AppColors.itemHandleColor),
+          ItemInfo(
+            label: 'Giới tính',
+            content: 'Nam',
+            onTap: _onTapGender,
+          ),
         ],
       ),
     );
@@ -136,11 +142,15 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen>
   Widget _personalInfo2() {
     return ElevatedContainer(
       bgColor: Colors.white,
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      padding: const EdgeInsets.symmetric(vertical: 8),
       margin: const EdgeInsets.symmetric(horizontal: 30),
       child: Column(
-        children: const [
-          ItemInfo(label: 'Quốc gia', content: 'Việt Nam'),
+        children: [
+          ItemInfo(
+            label: 'Quốc gia',
+            content: 'Việt Nam',
+            onTap: _onTapCountry,
+          ),
           Divider(height: 1, color: AppColors.itemHandleColor),
           ItemInfo(label: 'Tiền tệ', content: 'VND'),
           Divider(height: 1, color: AppColors.itemHandleColor),
@@ -149,6 +159,38 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen>
           ItemInfo(label: 'Thể lực', content: 'Tốt'),
         ],
       ),
+    );
+  }
+
+  void _onTapGender() {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.transparent,
+      builder: (context) {
+        return GenderModal(
+          onChooseGender: (p0) {
+            print('gender: $p0');
+          },
+        );
+      },
+    );
+  }
+
+  void _onTapCountry() {
+    double height = MediaQuery.of(context).size.height * 0.7;
+    showCountryPicker(
+      countryListTheme: CountryListThemeData(
+        inputDecoration: InputDecoration(
+          // todo: decorate search
+          border: OutlineInputBorder()
+        ),
+          backgroundColor: Colors.white,
+          borderRadius: BorderRadius.circular(15),
+          bottomSheetHeight: height),
+      context: context,
+      onSelect: (value) {
+        print('country: $value');
+      },
     );
   }
 }
