@@ -6,6 +6,8 @@ import 'package:my_app/configs/colors.dart';
 import 'package:my_app/configs/images.dart';
 import 'package:my_app/core/base/base_widget_screen_mixin.dart';
 import 'package:my_app/ui/screens/personal_info/modals/gender_modal.dart';
+import 'package:my_app/ui/screens/personal_info/modals/level_modal.dart';
+import 'package:my_app/ui/screens/personal_info/modals/physical_modal.dart';
 import 'package:my_app/ui/screens/personal_info/widgets/item_info.dart';
 import 'package:my_app/ui/widgets/cache_image.dart';
 import 'package:my_app/ui/widgets/elevated_container.dart';
@@ -154,9 +156,9 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen>
           Divider(height: 1, color: AppColors.itemHandleColor),
           ItemInfo(label: 'Tiền tệ', content: 'VND'),
           Divider(height: 1, color: AppColors.itemHandleColor),
-          ItemInfo(label: 'Trình độ', content: 'Chuyên gia'),
+          ItemInfo(label: 'Trình độ', content: 'Chuyên gia', onTap: _onTapLevel,),
           Divider(height: 1, color: AppColors.itemHandleColor),
-          ItemInfo(label: 'Thể lực', content: 'Tốt'),
+          ItemInfo(label: 'Thể lực', content: 'Tốt', onTap: _onTapPhysical),
         ],
       ),
     );
@@ -168,7 +170,7 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen>
       backgroundColor: Colors.transparent,
       builder: (context) {
         return GenderModal(
-          onChooseGender: (p0) {
+          onSelect: (p0) {
             print('gender: $p0');
           },
         );
@@ -190,6 +192,34 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen>
       context: context,
       onSelect: (value) {
         print('country: $value');
+      },
+    );
+  }
+
+  _onTapLevel() {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.transparent,
+      builder: (context) {
+        return LevelModal(
+          onSelect: (p0) {
+            print('level: $p0');
+          },
+        );
+      },
+    );
+  }
+
+  _onTapPhysical() {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.transparent,
+      builder: (context) {
+        return PhysicalModal(
+          onSelect: (p0) {
+            print('physical: $p0');
+          },
+        );
       },
     );
   }

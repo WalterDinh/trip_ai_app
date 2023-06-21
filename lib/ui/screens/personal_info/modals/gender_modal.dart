@@ -1,37 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/core/base/base_widget_mixin.dart';
-import 'package:my_app/ui/widgets/modal.dart';
-import 'package:my_app/ui/widgets/ripple.dart';
-import 'package:my_app/ui/widgets/spacer.dart';
+import 'package:my_app/ui/widgets/list_item_modal.dart';
 
-enum Gender { male, female }
+class Gender {
+  final int id;
+  final String label;
+
+  const Gender(this.id, this.label);
+
+  @override
+  String toString() {
+    return label;
+  }
+}
 
 class GenderModal extends StatelessWidget with BaseWidgetMixin {
-  const GenderModal({Key? key, this.onChooseGender}) : super(key: key);
+  const GenderModal({Key? key, this.onSelect}) : super(key: key);
 
-  final Function(Gender)? onChooseGender;
+  final Function(Gender)? onSelect;
 
   @override
   Widget body(BuildContext context) {
-    return Modal(
-      color: Colors.white,
-      child: Padding(
-        padding: const EdgeInsets.all(24),
-        child: Column(
-          children: [
-            // Text('Gender', style: Theme.of(context).textTheme.headlineMedium),
-            const VSpacer(24),
-            Ripple(
-                onTap: () => onChooseGender?.call(Gender.male),
-                child: const Text('Male')),
-            const VSpacer(16),
-            Ripple(
-                onTap: () => onChooseGender?.call(Gender.female),
-                child: const Text('Female')),
-            const VSpacer(16),
-          ],
-        ),
-      ),
+    final listItem = [
+      const Gender(1, "Nam"),
+      const Gender(2, "Nữ"),
+    ];
+
+    return ListItemModal<Gender>(
+      title: "Giới tính",
+      listItem: listItem,
+      onSelect: onSelect,
     );
   }
 }
