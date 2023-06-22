@@ -11,6 +11,7 @@ import 'package:my_app/ui/screens/personal_info/modals/physical_modal.dart';
 import 'package:my_app/ui/screens/personal_info/widgets/item_info.dart';
 import 'package:my_app/ui/widgets/cache_image.dart';
 import 'package:my_app/ui/widgets/elevated_container.dart';
+import 'package:my_app/ui/widgets/image_picker/image_picker_modal.dart';
 import 'package:my_app/ui/widgets/main_app_bar.dart';
 import 'package:my_app/ui/widgets/spacer.dart';
 
@@ -63,10 +64,13 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen>
           height: 88,
           child: ClipRRect(
             borderRadius: BorderRadius.circular(44),
-            child: const CacheImage(
-              fit: BoxFit.cover,
-              path:
-                  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-qbCmdpCG8m5YwrGGHSvd0ghiNXAj-IOoiA&usqp=CAU',
+            child: GestureDetector(
+              onTap: _onPickImage,
+              child: const CacheImage(
+                fit: BoxFit.cover,
+                path:
+                    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-qbCmdpCG8m5YwrGGHSvd0ghiNXAj-IOoiA&usqp=CAU',
+              ),
             ),
           ),
         ),
@@ -156,7 +160,11 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen>
           Divider(height: 1, color: AppColors.itemHandleColor),
           ItemInfo(label: 'Tiền tệ', content: 'VND'),
           Divider(height: 1, color: AppColors.itemHandleColor),
-          ItemInfo(label: 'Trình độ', content: 'Chuyên gia', onTap: _onTapLevel,),
+          ItemInfo(
+            label: 'Trình độ',
+            content: 'Chuyên gia',
+            onTap: _onTapLevel,
+          ),
           Divider(height: 1, color: AppColors.itemHandleColor),
           ItemInfo(label: 'Thể lực', content: 'Tốt', onTap: _onTapPhysical),
         ],
@@ -182,10 +190,9 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen>
     double height = MediaQuery.of(context).size.height * 0.7;
     showCountryPicker(
       countryListTheme: CountryListThemeData(
-        inputDecoration: InputDecoration(
-          // todo: decorate search
-          border: OutlineInputBorder()
-        ),
+          inputDecoration: InputDecoration(
+              // todo: decorate search
+              border: OutlineInputBorder()),
           backgroundColor: Colors.white,
           borderRadius: BorderRadius.circular(15),
           bottomSheetHeight: height),
@@ -218,6 +225,20 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen>
         return PhysicalModal(
           onSelect: (p0) {
             print('physical: $p0');
+          },
+        );
+      },
+    );
+  }
+
+  void _onPickImage() {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.transparent,
+      builder: (context) {
+        return ImagePickerModal(
+          onTakeImage: (p0) {
+            print('image ${p0?.path}');
           },
         );
       },
