@@ -9,8 +9,7 @@ class ResultSearch extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: double.infinity,
+    return Expanded(
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -27,7 +26,12 @@ class ResultSearch extends StatelessWidget {
               ),
             ),
             Column(
-              children: data!.map((e) => Text('23')).toList(),
+              children: data!
+                  .map((e) => const Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: ItemResultSearch(image: AppImages.introduction1),
+                      ))
+                  .toList(),
             )
           ],
         ),

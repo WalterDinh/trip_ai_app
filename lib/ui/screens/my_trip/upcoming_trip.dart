@@ -16,7 +16,7 @@ class UpcomingTripScreen extends StatefulWidget {
 
 class _UpcomingTripScreenState extends State<UpcomingTripScreen> {
   void onNavigateToDetail(int id) {
-    AppNavigator.push(Routes.detail_trip);
+    AppNavigator.push(Routes.detail_trip, DetailTripType.upcoming_trip);
   }
 
   @override
