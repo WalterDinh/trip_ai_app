@@ -29,46 +29,51 @@ class _ProfileScreenState extends State<ProfileScreen> with BaseState {
   }
 
   @override
+  bool pageExtendBody() {
+    return false;
+  }
+
+  @override
   Widget body(BuildContext context) {
     double chartHeight = 170;
+    double paddingTop = MediaQuery.of(context).padding.top;
 
-    return SafeArea(
-      child: SingleChildScrollView(
-        physics: const BouncingScrollPhysics(),
-        child: Column(
-          children: [
-            const VSpacer(24),
-            _buildPersonalInfoContainer(),
-            // _buildRowAddFriendAndFollow(),
-            const VSpacer(16),
-            const Text(
-              'Thống kê du lịch của bạn',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
-            ),
-            const VSpacer(16),
-            Container(
-              height: chartHeight,
-              margin: const EdgeInsets.symmetric(horizontal: 50),
-              child: ChartStatistic(),
-            ),
-            const VSpacer(24),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: _statisticCardsRowTop(),
-            ),
-            const VSpacer(14),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: _statisticCardsRowBottom(),
-            ),
-            const VSpacer(40),
-            const SizedBox(
-              height: 320,
-              child: ListFavoritePlace(),
-            ),
-            VSpacer(MediaQuery.of(context).padding.bottom)
-          ],
-        ),
+    return SingleChildScrollView(
+      physics: const BouncingScrollPhysics(),
+      child: Column(
+        children: [
+          VSpacer(paddingTop),
+          const VSpacer(24),
+          _buildPersonalInfoContainer(),
+          // _buildRowAddFriendAndFollow(),
+          const VSpacer(16),
+          const Text(
+            'Thống kê du lịch của bạn',
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
+          ),
+          const VSpacer(16),
+          Container(
+            height: chartHeight,
+            margin: const EdgeInsets.symmetric(horizontal: 50),
+            child: ChartStatistic(),
+          ),
+          const VSpacer(24),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            child: _statisticCardsRowTop(),
+          ),
+          const VSpacer(14),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            child: _statisticCardsRowBottom(),
+          ),
+          const VSpacer(40),
+          const SizedBox(
+            height: 320,
+            child: ListFavoritePlace(),
+          ),
+          VSpacer(MediaQuery.of(context).padding.bottom)
+        ],
       ),
     );
   }

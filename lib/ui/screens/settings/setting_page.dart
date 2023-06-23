@@ -1,16 +1,11 @@
 import 'dart:async';
 
-import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:my_app/configs/colors.dart';
-import 'package:my_app/configs/images.dart';
+
 import 'package:my_app/core/base/base_widget_screen_mixin.dart';
 import 'package:my_app/core/values/app_values.dart';
 import 'package:my_app/routes.dart';
 import 'package:my_app/ui/widgets/cache_image.dart';
-
-import 'package:my_app/ui/widgets/main_app_bar.dart';
-import 'package:my_app/ui/widgets/spacer.dart';
 
 import 'widgets/drop_down_language.dart';
 import 'widgets/item_setting.dart';
@@ -29,6 +24,10 @@ class _SettingScreenState extends State<SettingScreen> with BaseState {
     super.initState();
   }
 
+  void onNavigateToChangePassword() {
+    AppNavigator.push(Routes.change_password);
+  }
+
   @override
   Widget body(BuildContext context) {
     return Column(
@@ -41,11 +40,7 @@ class _SettingScreenState extends State<SettingScreen> with BaseState {
             onPress: () {
               return;
             }),
-        ItemSetting(
-            title: 'Password',
-            onPress: () {
-              return;
-            }),
+        ItemSetting(title: 'Password', onPress: onNavigateToChangePassword),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 4),
           child: Divider(

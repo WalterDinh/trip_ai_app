@@ -5,14 +5,14 @@ import 'package:my_app/core/values/app_values.dart';
 import 'package:my_app/ui/widgets/elevated_container.dart';
 import 'package:my_app/ui/widgets/spacer.dart';
 
-class ItemMoreTrip extends StatelessWidget with BaseWidgetMixin {
-  const ItemMoreTrip({Key? key, required this.image}) : super(key: key);
+class ItemResultSearch extends StatelessWidget with BaseWidgetMixin {
+  const ItemResultSearch({Key? key, required this.image}) : super(key: key);
 
   final AssetImage image;
 
   @override
   Widget body(BuildContext context) {
-    double itemHeight = 130;
+    double itemHeight = 110;
 
     return ElevatedContainer(
       bgColor: Colors.white,
@@ -57,26 +57,21 @@ class ItemMoreTrip extends StatelessWidget with BaseWidgetMixin {
               ),
             ],
           ),
-          Column(
-            children: [
-              const VSpacer(4),
-              Row(
-                children: const [
-                  Icon(Icons.schedule_outlined, color: AppColors.darkGreen),
-                  HSpacer(8),
-                  Text('18 July-19 July')
-                ],
+          const VSpacer(8),
+          Row(
+            children: const [
+              Icon(Icons.camera_alt_rounded),
+              HSpacer(4),
+              Icon(
+                Icons.restaurant_menu,
               ),
-              const VSpacer(4),
-              Row(
-                children: const [
-                  Icon(
-                    Icons.people_alt_outlined,
-                    color: AppColors.darkGreen,
-                  ),
-                  HSpacer(8),
-                  Text('2 people')
-                ],
+              HSpacer(4),
+              Icon(
+                Icons.local_activity,
+              ),
+              HSpacer(4),
+              Icon(
+                Icons.location_city_outlined,
               )
             ],
           )

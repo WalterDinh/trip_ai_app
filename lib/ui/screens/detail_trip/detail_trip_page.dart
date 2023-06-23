@@ -23,20 +23,23 @@ final List<PlanTabBarItem> myTabs = [
         totalDays: 3,
         listPhoto: [],
       )),
-  PlanTabBarItem('TodoPlan', const TodoPlanTab()),
+  PlanTabBarItem(
+      'TodoPlan',
+      const TodoPlanTab(
+        canEdit: false,
+      )),
   PlanTabBarItem('Reviews', const ReviewTab()),
 ];
 
 class DetailTripScreen extends StatefulWidget {
-  const DetailTripScreen({super.key});
-
+  const DetailTripScreen({super.key, required this.tripType});
+  final DetailTripType tripType;
   @override
   State<StatefulWidget> createState() => _DetailTripScreenState();
 }
 
 class _DetailTripScreenState extends State<DetailTripScreen>
     with TickerProviderStateMixin, BaseState {
-  late AppLocalizations appLocalization;
   late TabController tabController;
   int currentPage = 0;
 
@@ -62,8 +65,8 @@ class _DetailTripScreenState extends State<DetailTripScreen>
   }
 
   @override
-  Widget bottomNavigationBar() {
-    return _rowButton();
+  Widget? bottomNavigationBar() {
+    return _rowButton(widget.tripType);
   }
 
   @override
@@ -85,7 +88,8 @@ class _DetailTripScreenState extends State<DetailTripScreen>
               padding: const EdgeInsets.symmetric(horizontal: 32.0),
               child: Column(
                 children: [
-                  const BasicInfoPLan(
+                  BasicInfoPLan(
+                      type: widget.tripType,
                       imageUrl:
                           'https://www.studytienganh.vn/upload/2021/05/99552.jpeg',
                       placeName: 'Tokyo',
@@ -109,34 +113,22 @@ class _DetailTripScreenState extends State<DetailTripScreen>
     );
   }
 
-  Widget _rowButton() {
+  Widget? _rowButton(DetailTripType type) {
+    if (type == DetailTripType.upcoming_trip) {
+      return null;
+    }
+
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: AppValues.largePadding),
-      child: Row(
-        children: [
-          // Expanded(
-          //     child: Container(
-          //         margin: const EdgeInsets.only(bottom: 32.0),
-          //         child: ElevatedButton(
-          //             style:
-          //                 ElevatedButtonThemeApp.lightElevatedButtonTheme.style,
-          //             onPressed: () {
-          //               return;
-          //             },
-          //             child: const Text('Reroll Trip')))),
-          // const SizedBox(
-          //   width: AppValues.extraLargePadding,
-          // ),
+        padding: const EdgeInsets.symmetric(horizontal: AppValues.largePadding),
+        child: Row(children: [
           Expanded(
               child: Container(
                   margin: const EdgeInsets.only(bottom: 32.0),
                   child: ElevatedButton(
                       onPressed: () {
-                        return;
+                        AppNavigator.push(Routes.create_plan_trip);
                       },
                       child: const Text('Create trip')))),
-        ],
-      ),
-    );
+        ]));
   }
 }

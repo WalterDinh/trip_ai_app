@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_app/core/fade_page_route.dart';
 import 'package:my_app/states/search/search_bloc.dart';
 import 'package:my_app/states/sign_up/sign_up_cubit.dart';
+import 'package:my_app/ui/screens/change_password/change_pasword_page.dart';
 import 'package:my_app/ui/screens/detail_trip/detail_trip_page.dart';
 import 'package:my_app/ui/screens/friends/friends.dart';
 import 'package:my_app/ui/screens/create_plan_trip/create_plan_trip_page.dart';
@@ -14,6 +15,8 @@ import 'package:my_app/ui/screens/main/main_app.dart';
 import 'package:my_app/ui/screens/more_trip/more_trip.dart';
 import 'package:my_app/ui/screens/notification_detail/notification_detail.dart';
 import 'package:my_app/ui/screens/personal_info/personal_info.dart';
+import 'package:my_app/ui/screens/place_detail/place_detail.dart';
+import 'package:my_app/ui/screens/search_place/search_place_page.dart';
 import 'package:my_app/ui/screens/search_trip/search_trip_page.dart';
 import 'package:my_app/ui/screens/settings/setting_page.dart';
 import 'package:my_app/ui/screens/signup/sign_up_page.dart';
@@ -34,8 +37,13 @@ enum Routes {
   detail_trip,
   search_trip,
   more_trip,
-  setting
+  setting,
+  place_detail,
+  change_password,
+  search_place
 }
+
+enum DetailTripType { upcoming_trip, past_trip, recommend_trip, create_trip }
 
 class _Paths {
   static const String splash = '/';
@@ -53,6 +61,9 @@ class _Paths {
   static const String search_trip = '/search_trip';
   static const String more_trip = '/more_trip';
   static const String setting = '/setting';
+  static const String place_detail = '/place_detail';
+  static const String change_password = '/change_password';
+  static const String search_place = '/search_place';
 
   static const Map<Routes, String> _pathMap = {
     Routes.splash: _Paths.splash,
@@ -70,6 +81,9 @@ class _Paths {
     Routes.search_trip: _Paths.search_trip,
     Routes.more_trip: _Paths.more_trip,
     Routes.setting: _Paths.setting,
+    Routes.place_detail: _Paths.place_detail,
+    Routes.change_password: _Paths.change_password,
+    Routes.search_place: _Paths.search_place
   };
 
   static String of(Routes route) => _pathMap[route] ?? splash;
@@ -108,12 +122,20 @@ class AppNavigator {
       case _Paths.friends:
         return FadeRoute(page: const FriendsScreen());
       case _Paths.detail_trip:
-        return FadeRoute(page: const DetailTripScreen());
+        final args = settings.arguments as DetailTripType;
+        return FadeRoute(page: DetailTripScreen(tripType: args));
       case _Paths.more_trip:
         final args = settings.arguments as int;
         return FadeRoute(page: MoreTripScreen(from: args));
       case _Paths.setting:
         return FadeRoute(page: const SettingScreen());
+      case _Paths.place_detail:
+        return FadeRoute(page: const PlaceDetailScreen());
+      case _Paths.change_password:
+        return FadeRoute(page: const ChangePasswordScreen());
+      case _Paths.search_place:
+        return FadeRoute(page: const SearchPlaceScreen());
+
       default:
         return FadeRoute(page: const IntroScreen());
     }
