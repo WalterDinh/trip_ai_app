@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:my_app/configs/colors.dart';
 import 'package:my_app/core/base/base_widget_mixin.dart';
@@ -15,6 +16,10 @@ class ItemInfo extends StatelessWidget with BaseWidgetMixin {
 
   @override
   Widget body(BuildContext context) {
+    if (kDebugMode) {
+      print('ItemInfo build $label');
+    }
+
     return Ripple(
       onTap: onTap,
       child: Container(

@@ -32,7 +32,10 @@ class ListItemModal<T> extends StatelessWidget with BaseWidgetMixin {
                 final item = listItem[index];
 
                 return Ripple(
-                  onTap: () => onSelect?.call(item),
+                  onTap: () {
+                    onSelect?.call(item);
+                    Navigator.of(context).pop();
+                  },
                   child: Padding(
                     padding: const EdgeInsets.symmetric(vertical: 8.0),
                     child: Text(item.toString(), textAlign: TextAlign.center),
@@ -53,7 +56,10 @@ class ListItemModal<T> extends StatelessWidget with BaseWidgetMixin {
       visible: title != null,
       child: Text(
         title ?? "",
-        style: Theme.of(context).textTheme.headlineMedium,
+        style: Theme
+            .of(context)
+            .textTheme
+            .headlineMedium,
       ),
     );
   }

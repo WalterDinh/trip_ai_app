@@ -1,10 +1,15 @@
+import 'dart:async';
 import 'dart:ui';
 
 import 'package:country_picker/country_picker.dart';
+import 'package:currency_picker/currency_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_app/configs/colors.dart';
 import 'package:my_app/configs/images.dart';
 import 'package:my_app/core/base/base_widget_screen_mixin.dart';
+import 'package:my_app/states/personal_info/personal_info_bloc.dart';
+import 'package:my_app/states/personal_info/personal_info_selector.dart';
 import 'package:my_app/ui/screens/personal_info/modals/gender_modal.dart';
 import 'package:my_app/ui/screens/personal_info/modals/level_modal.dart';
 import 'package:my_app/ui/screens/personal_info/modals/physical_modal.dart';
@@ -12,7 +17,6 @@ import 'package:my_app/ui/screens/personal_info/widgets/item_info.dart';
 import 'package:my_app/ui/widgets/cache_image.dart';
 import 'package:my_app/ui/widgets/elevated_container.dart';
 import 'package:my_app/ui/widgets/image_picker/image_picker_modal.dart';
-import 'package:my_app/ui/widgets/main_app_bar.dart';
 import 'package:my_app/ui/widgets/spacer.dart';
 
 class PersonalInfoScreen extends StatefulWidget {
@@ -24,6 +28,16 @@ class PersonalInfoScreen extends StatefulWidget {
 
 class _PersonalInfoScreenState extends State<PersonalInfoScreen>
     with BaseState {
+  PersonalInfoBloc get personalInfoBloc => context.read<PersonalInfoBloc>();
+
+  @override
+  void initState() {
+    scheduleMicrotask(() {
+      personalInfoBloc.add(const GetPersonalInfoEvent());
+    });
+    super.initState();
+  }
+
   @override
   Widget body(BuildContext context) {
     return SingleChildScrollView(
@@ -43,8 +57,10 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen>
   }
 
   Widget _personalInfoContainer() {
+    double height = 210;
+
     return SizedBox(
-      height: 210,
+      height: height,
       child: Stack(fit: StackFit.expand, children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 30),
@@ -59,21 +75,7 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen>
     return Column(
       children: [
         const VSpacer(24),
-        SizedBox(
-          width: 88,
-          height: 88,
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(44),
-            child: GestureDetector(
-              onTap: _onPickImage,
-              child: const CacheImage(
-                fit: BoxFit.cover,
-                path:
-                    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-qbCmdpCG8m5YwrGGHSvd0ghiNXAj-IOoiA&usqp=CAU',
-              ),
-            ),
-          ),
-        ),
+        _personalAvatar(),
         const VSpacer(14),
         const Text(
           'Nguyen Gnauq',
@@ -111,6 +113,27 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen>
     );
   }
 
+  SizedBox _personalAvatar() {
+    double avatarSize = 88;
+
+    return SizedBox(
+      width: avatarSize,
+      height: avatarSize,
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(avatarSize / 2),
+        child: GestureDetector(
+          onTap: _onPickImage,
+          child: InfoAvatarSelector(
+            (avatar) => CacheImage(
+              fit: BoxFit.cover,
+              path: avatar,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
   Widget _personalInfoBackdrop() {
     return ClipRRect(
       borderRadius: BorderRadius.circular(10),
@@ -131,14 +154,22 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen>
       margin: const EdgeInsets.symmetric(horizontal: 30),
       child: Column(
         children: [
-          const ItemInfo(label: 'Số điện thoại', content: '0987654321'),
-          const Divider(height: 1, color: AppColors.itemHandleColor),
-          const ItemInfo(label: 'Email', content: 'email@email.com'),
-          const Divider(height: 1, color: AppColors.itemHandleColor),
-          ItemInfo(
-            label: 'Giới tính',
-            content: 'Nam',
-            onTap: _onTapGender,
+          InfoPhoneSelector(
+            (phone) => ItemInfo(label: 'Số điện thoại', content: phone),
+          ),
+          _divider(),
+          InfoEmailSelector(
+            (email) => ItemInfo(label: 'Email', content: email),
+          ),
+          _divider(),
+          InfoGenderSelector(
+            (gender) {
+              return ItemInfo(
+                label: 'Giới tính',
+                content: gender,
+                onTap: _onTapGender,
+              );
+            },
           ),
         ],
       ),
@@ -152,25 +183,44 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen>
       margin: const EdgeInsets.symmetric(horizontal: 30),
       child: Column(
         children: [
-          ItemInfo(
-            label: 'Quốc gia',
-            content: 'Việt Nam',
-            onTap: _onTapCountry,
+          InfoCountrySelector(
+            (country) => ItemInfo(
+              label: 'Quốc gia',
+              content: country,
+              onTap: _onTapCountry,
+            ),
           ),
-          Divider(height: 1, color: AppColors.itemHandleColor),
-          ItemInfo(label: 'Tiền tệ', content: 'VND'),
-          Divider(height: 1, color: AppColors.itemHandleColor),
-          ItemInfo(
-            label: 'Trình độ',
-            content: 'Chuyên gia',
-            onTap: _onTapLevel,
+          _divider(),
+          InfoCurrencySelector(
+            (currency) => ItemInfo(
+              label: 'Tiền tệ',
+              content: currency,
+              onTap: _onTapCurrency,
+            ),
           ),
-          Divider(height: 1, color: AppColors.itemHandleColor),
-          ItemInfo(label: 'Thể lực', content: 'Tốt', onTap: _onTapPhysical),
+          _divider(),
+          InfoLevelSelector(
+            (level) => ItemInfo(
+              label: 'Trình độ',
+              content: level,
+              onTap: _onTapLevel,
+            ),
+          ),
+          _divider(),
+          InfoPhysicalSelector(
+            (physical) => ItemInfo(
+              label: 'Thể lực',
+              content: physical,
+              onTap: _onTapPhysical,
+            ),
+          ),
         ],
       ),
     );
   }
+
+  Divider _divider() =>
+      const Divider(height: 1, color: AppColors.itemHandleColor);
 
   void _onTapGender() {
     showModalBottomSheet(
@@ -178,8 +228,8 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen>
       backgroundColor: Colors.transparent,
       builder: (context) {
         return GenderModal(
-          onSelect: (p0) {
-            print('gender: $p0');
+          onSelect: (gender) {
+            personalInfoBloc.add(UpdateGenderEvent(gender.label));
           },
         );
       },
@@ -191,14 +241,36 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen>
     showCountryPicker(
       countryListTheme: CountryListThemeData(
           inputDecoration: InputDecoration(
-              // todo: decorate search
-              border: OutlineInputBorder()),
+            hintText: 'Search',
+            hintStyle: Theme.of(context)
+                .textTheme
+                .titleMedium!
+                .copyWith(color: AppColors.textHintColorGrey),
+            border: OutlineInputBorder(
+              borderSide: const BorderSide(color: AppColors.grey800, width: 1),
+              borderRadius: BorderRadius.circular(15),
+            ),
+          ),
           backgroundColor: Colors.white,
           borderRadius: BorderRadius.circular(15),
           bottomSheetHeight: height),
       context: context,
-      onSelect: (value) {
-        print('country: $value');
+      onSelect: (country) {
+        personalInfoBloc.add(UpdateCountryEvent(country.name));
+      },
+    );
+  }
+
+  void _onTapCurrency() {
+    double height = MediaQuery.of(context).size.height * 0.7;
+    showCurrencyPicker(
+      theme: CurrencyPickerThemeData(
+        backgroundColor: Colors.white,
+        bottomSheetHeight: height,
+      ),
+      context: context,
+      onSelect: (currency) {
+        personalInfoBloc.add(UpdateCurrencyEvent(currency.name));
       },
     );
   }
@@ -209,8 +281,8 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen>
       backgroundColor: Colors.transparent,
       builder: (context) {
         return LevelModal(
-          onSelect: (p0) {
-            print('level: $p0');
+          onSelect: (level) {
+            personalInfoBloc.add(UpdateLevelEvent(level.label));
           },
         );
       },
@@ -223,8 +295,9 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen>
       backgroundColor: Colors.transparent,
       builder: (context) {
         return PhysicalModal(
-          onSelect: (p0) {
-            print('physical: $p0');
+          onSelect: (physical) {
+            print('physical: $physical');
+            personalInfoBloc.add(UpdatePhysicalEvent(physical.label));
           },
         );
       },
@@ -237,8 +310,13 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen>
       backgroundColor: Colors.transparent,
       builder: (context) {
         return ImagePickerModal(
-          onTakeImage: (p0) {
-            print('image ${p0?.path}');
+          onTakeImage: (image) {
+            // TODO: download avatar from url and handle show
+            print('image ${image?.path}');
+            if (image?.path != null) {
+              personalInfoBloc.add(UpdateAvatarEvent(image!.path));
+            }
+            Navigator.of(context).pop();
           },
         );
       },

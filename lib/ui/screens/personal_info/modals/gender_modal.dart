@@ -22,8 +22,8 @@ class GenderModal extends StatelessWidget with BaseWidgetMixin {
   @override
   Widget body(BuildContext context) {
     final listItem = [
-      const Gender(1, "Nam"),
-      const Gender(2, "Nữ"),
+      const Gender(0, "Nam"),
+      const Gender(1, "Nữ"),
     ];
 
     return ListItemModal<Gender>(
