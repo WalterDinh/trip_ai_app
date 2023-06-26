@@ -23,7 +23,11 @@ final List<PlanTabBarItem> myTabs = [
         totalDays: 3,
         listPhoto: [],
       )),
-  PlanTabBarItem('TodoPlan', const TodoPlanTab()),
+  PlanTabBarItem(
+      'TodoPlan',
+      const TodoPlanTab(
+        canEdit: true,
+      )),
   PlanTabBarItem('Reviews', const ReviewTab()),
 ];
 
@@ -85,6 +89,7 @@ class _CreatePlanTripScreenState extends State<CreatePlanTripScreen>
               child: Column(
                 children: [
                   const BasicInfoPLan(
+                      type: DetailTripType.create_trip,
                       imageUrl:
                           'https://www.studytienganh.vn/upload/2021/05/99552.jpeg',
                       placeName: 'Tokyo',

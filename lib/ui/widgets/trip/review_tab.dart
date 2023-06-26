@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/configs/colors.dart';
+import 'package:my_app/ui/widgets/spacer.dart';
 
 List<String> items = [
   "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-qbCmdpCG8m5YwrGGHSvd0ghiNXAj-IOoiA&usqp=CAU",
@@ -9,8 +11,23 @@ List<String> items = [
   "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-qbCmdpCG8m5YwrGGHSvd0ghiNXAj-IOoiA&usqp=CAU",
 ];
 
-class ReviewTab extends StatelessWidget {
+class ReviewTab extends StatefulWidget {
   const ReviewTab({Key? key}) : super(key: key);
+
+  @override
+  State<ReviewTab> createState() => _ReviewTabState();
+}
+
+class _ReviewTabState extends State<ReviewTab> {
+  late TextEditingController textEditingController;
+  late FocusNode focusNode;
+
+  @override
+  void initState() {
+    textEditingController = TextEditingController();
+    focusNode = FocusNode();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,25 +36,55 @@ class ReviewTab extends StatelessWidget {
           child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 32.0),
         child: Column(
-          children: const [
-            ItemReview(
+          children: [
+            const ItemReview(
               reviewContent: 'Good trip',
               reviewerName: 'Haku',
               avatarUrl:
                   'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-qbCmdpCG8m5YwrGGHSvd0ghiNXAj-IOoiA&usqp=CAU',
             ),
-            ItemReview(
+            const ItemReview(
               reviewContent: 'This trip plan was amazing!',
               reviewerName: 'John Doe',
               avatarUrl:
                   'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-qbCmdpCG8m5YwrGGHSvd0ghiNXAj-IOoiA&usqp=CAU',
             ),
-            ItemReview(
+            const ItemReview(
               reviewContent: 'Good trip',
               reviewerName: 'Haku',
               avatarUrl:
                   'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-qbCmdpCG8m5YwrGGHSvd0ghiNXAj-IOoiA&usqp=CAU',
             ),
+            const VSpacer(24),
+            Container(
+              padding: const EdgeInsets.symmetric(vertical: 4.0),
+              child: Row(children: [
+                Expanded(
+                  child: TextField(
+                      decoration: InputDecoration(
+                          hintText: 'Write a comment',
+                          hintStyle: Theme.of(context)
+                              .textTheme
+                              .titleMedium!
+                              .copyWith(color: AppColors.textHintColorGrey),
+                          suffixIcon: Icon(Icons.send,
+                              color: Theme.of(context).primaryColor),
+                          contentPadding: const EdgeInsets.all(14),
+                          fillColor: AppColors.backgroundTextFieldOpacity,
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8),
+                            borderSide: const BorderSide(
+                                color: Colors.transparent, width: 0.0),
+                          ),
+                          filled: true,
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8),
+                            borderSide: const BorderSide(
+                                color: Colors.transparent, width: 1.0),
+                          ))),
+                )
+              ]),
+            )
           ],
         ),
       ))

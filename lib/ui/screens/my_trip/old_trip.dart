@@ -14,7 +14,7 @@ class OldTripPage extends StatefulWidget {
 
 class _OldTripScreenState extends State<OldTripPage> {
   void onNavigateToDetail(int id) {
-    AppNavigator.push(Routes.detail_trip);
+    AppNavigator.push(Routes.detail_trip, DetailTripType.past_trip);
   }
 
   @override

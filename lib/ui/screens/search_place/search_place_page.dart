@@ -1,32 +1,19 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+
 import 'package:my_app/configs/colors.dart';
-import 'package:my_app/configs/images.dart';
 import 'package:my_app/core/base/base_widget_screen_mixin.dart';
 import 'package:my_app/core/values/app_values.dart';
 
-import 'package:my_app/states/search/search_bloc.dart';
-import 'package:my_app/ui/screens/my_trip/widgets/item_more_trip.dart';
-
-import 'package:my_app/ui/widgets/spacer.dart';
-
-import 'widgets/item_result_search.dart';
-
-part 'sections/empty_data_search.dart';
-part 'sections/result_search.dart';
-part 'sections/default_search_view.dart';
-
-class SearchScreen extends StatefulWidget {
-  const SearchScreen({super.key});
+class SearchPlaceScreen extends StatefulWidget {
+  const SearchPlaceScreen({super.key});
 
   @override
-  State<StatefulWidget> createState() => _SearchScreenState();
+  State<StatefulWidget> createState() => _SearchPlaceScreenState();
 }
 
-class _SearchScreenState extends State<SearchScreen> with BaseState {
+class _SearchPlaceScreenState extends State<SearchPlaceScreen> with BaseState {
   TextEditingController controller = TextEditingController();
   String textSearch = '';
   Timer? _debounceTimer;
@@ -82,25 +69,6 @@ class _SearchScreenState extends State<SearchScreen> with BaseState {
                 )),
           ),
         ),
-        BlocBuilder<SearchBloc, SearchState>(builder: (context, state) {
-          return const ResultSearch(
-            data: [1, 2, 3, 4],
-          );
-
-          if (state.status == SearchStateStatus.loading ||
-              textSearch != controller.text) {
-            return const Text('Loading');
-          }
-
-          if (state.listRecent.isEmpty && textSearch == '') {
-            return DefaultSearchView(context: context);
-          }
-
-          if (state.listFileScanDataSearch.isEmpty &&
-              state.listFolderDataSearch.isEmpty) {
-            return EmptyDataSearch(context: context);
-          }
-        })
       ],
     );
   }

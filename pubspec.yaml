@@ -32,6 +32,8 @@ dependencies:
   currency_picker: ^2.0.16
   image_picker: ^0.8.9
   image_cropper: ^4.0.1
+  dotted_border: ^2.0.0+3
+  counter_button: ^1.0.1
 
 dev_dependencies:
   flutter_test:

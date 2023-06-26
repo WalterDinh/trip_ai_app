@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:my_app/configs/colors.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:my_app/configs/images.dart';
 import 'package:my_app/core/base/base_widget_mixin.dart';
 import 'package:my_app/core/base/base_widget_screen_mixin.dart';
 import 'package:my_app/core/values/app_values.dart';
 import 'package:my_app/routes.dart';
+import 'package:my_app/states/sign_up/sign_up_cubit.dart';
 import 'package:my_app/ui/widgets/ripple.dart';
 import 'package:my_app/ui/widgets/spacer.dart';
 import 'widgets/item_category.dart';
@@ -44,7 +44,7 @@ class _HomeScreenState extends State<HomeScreen> with BaseState {
   }
 
   void onNavigateToDetail(int id) {
-    AppNavigator.push(Routes.detail_trip);
+    AppNavigator.push(Routes.detail_trip, DetailTripType.recommend_trip);
   }
 
   void onNavigateToSearch() {
