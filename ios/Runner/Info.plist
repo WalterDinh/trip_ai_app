@@ -47,5 +47,9 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>To select local pictures from library, and save posts to the device, allow us to access your photos</string>
+    <key>NSPhotoLibraryAddUsageDescription</key>
+    <string>To select local pictures from library, and save posts to the device, allow us to access your photos</string>
 </dict>
 </plist>
