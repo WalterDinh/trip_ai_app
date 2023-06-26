@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 import 'dart:ui';
 
 import 'package:country_picker/country_picker.dart';
@@ -123,12 +124,12 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen>
         borderRadius: BorderRadius.circular(avatarSize / 2),
         child: GestureDetector(
           onTap: _onPickImage,
-          child: InfoAvatarSelector(
-            (avatar) => CacheImage(
-              fit: BoxFit.cover,
-              path: avatar,
-            ),
-          ),
+          child: InfoAvatarSelector((avatar) {
+            // fixme: fix after handle download avatar
+            return avatar.contains("http")
+                ? CacheImage(fit: BoxFit.cover, path: avatar)
+                : Image.file(File(avatar), fit: BoxFit.cover);
+          }),
         ),
       ),
     );
@@ -296,7 +297,6 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen>
       builder: (context) {
         return PhysicalModal(
           onSelect: (physical) {
-            print('physical: $physical');
             personalInfoBloc.add(UpdatePhysicalEvent(physical.label));
           },
         );
@@ -312,7 +312,6 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen>
         return ImagePickerModal(
           onTakeImage: (image) {
             // TODO: download avatar from url and handle show
-            print('image ${image?.path}');
             if (image?.path != null) {
               personalInfoBloc.add(UpdateAvatarEvent(image!.path));
             }
