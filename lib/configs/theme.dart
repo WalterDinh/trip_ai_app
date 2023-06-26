@@ -20,7 +20,7 @@ class Theming {
     focusColor: AppColors.whiteGrey,
     hintColor: AppColors.conch,
     colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.blue).copyWith(
-      background: AppColors.black,
+      background: AppColors.whiteGrey,
       brightness: Brightness.dark,
     ),
   );
@@ -194,7 +194,7 @@ class TextThemeApp {
   static const TextStyle bodyMediumText =
       TextStyle(fontSize: 14, height: 9 / 7, fontWeight: FontWeight.w500);
   static const TextStyle bodySmallText =
-      TextStyle(fontSize: 13, height: 13 / 16, fontWeight: FontWeight.w400);
+      TextStyle(fontSize: 13, height: 18 / 16, fontWeight: FontWeight.w400);
   static const TextStyle bodySmallerText =
       TextStyle(fontSize: 12, fontWeight: FontWeight.w300);
 

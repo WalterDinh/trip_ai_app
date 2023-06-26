@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:my_app/configs/colors.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:my_app/configs/theme.dart';
+import 'package:my_app/core/base/base_widget_screen_mixin.dart';
 import 'package:my_app/core/values/app_values.dart';
 import 'package:my_app/routes.dart';
 import 'package:my_app/ui/widgets/spacer.dart';
@@ -22,20 +23,23 @@ final List<PlanTabBarItem> myTabs = [
         totalDays: 3,
         listPhoto: [],
       )),
-  PlanTabBarItem('TodoPlan', const TodoPlanTab()),
+  PlanTabBarItem(
+      'TodoPlan',
+      const TodoPlanTab(
+        canEdit: false,
+      )),
   PlanTabBarItem('Reviews', const ReviewTab()),
 ];
 
 class DetailTripScreen extends StatefulWidget {
-  const DetailTripScreen({super.key});
-
+  const DetailTripScreen({super.key, required this.tripType});
+  final DetailTripType tripType;
   @override
   State<StatefulWidget> createState() => _DetailTripScreenState();
 }
 
 class _DetailTripScreenState extends State<DetailTripScreen>
-    with TickerProviderStateMixin {
-  late AppLocalizations appLocalization;
+    with TickerProviderStateMixin, BaseState {
   late TabController tabController;
   int currentPage = 0;
 
@@ -56,81 +60,75 @@ class _DetailTripScreenState extends State<DetailTripScreen>
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.whiteGrey,
-      bottomNavigationBar: _rowButton(),
-      extendBody: true,
-      body: DefaultTabController(
-        initialIndex: 1,
-        animationDuration: const Duration(milliseconds: 400),
-        length: 3,
-        child: NestedScrollView(
-          headerSliverBuilder: (context, value) {
-            return [
-              const SliverAppBar(
-                title: Text('Plan'),
-                backgroundColor: Colors.transparent,
-                iconTheme: IconThemeData(color: AppColors.black),
+  bool pageExtendBody() {
+    return true;
+  }
+
+  @override
+  Widget? bottomNavigationBar() {
+    return _rowButton(widget.tripType);
+  }
+
+  @override
+  Widget screenName() {
+    return const Text("Plan");
+  }
+
+  @override
+  Widget body(BuildContext context) {
+    return DefaultTabController(
+      initialIndex: 1,
+      animationDuration: const Duration(milliseconds: 400),
+      length: 3,
+      child: NestedScrollView(
+        headerSliverBuilder: (context, value) {
+          return [
+            SliverToBoxAdapter(
+                child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 32.0),
+              child: Column(
+                children: [
+                  BasicInfoPLan(
+                      type: widget.tripType,
+                      imageUrl:
+                          'https://www.studytienganh.vn/upload/2021/05/99552.jpeg',
+                      placeName: 'Tokyo',
+                      rating: 4.3,
+                      totalRating: 300),
+                  const VSpacer(8),
+                  InfoTripBarTab(
+                    myTabs: myTabs,
+                    onChangeTab: (key) => tabController.animateTo(key),
+                  ),
+                  const VSpacer(16)
+                ],
               ),
-              SliverToBoxAdapter(
-                  child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 32.0),
-                child: Column(
-                  children: [
-                    const BasicInfoPLan(
-                        imageUrl:
-                            'https://www.studytienganh.vn/upload/2021/05/99552.jpeg',
-                        placeName: 'Tokyo',
-                        rating: 4.3,
-                        totalRating: 300),
-                    const VSpacer(8),
-                    InfoTripBarTab(
-                      myTabs: myTabs,
-                      onChangeTab: (key) => tabController.animateTo(key),
-                    ),
-                    const VSpacer(16)
-                  ],
-                ),
-              ))
-            ];
-          },
-          body: TabBarView(
-              controller: tabController,
-              children: myTabs.map((e) => e.widget).toList()),
-        ),
+            ))
+          ];
+        },
+        body: TabBarView(
+            controller: tabController,
+            children: myTabs.map((e) => e.widget).toList()),
       ),
     );
   }
 
-  Widget _rowButton() {
+  Widget? _rowButton(DetailTripType type) {
+    if (type == DetailTripType.upcoming_trip) {
+      return null;
+    }
+
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: AppValues.largePadding),
-      child: Row(
-        children: [
-          // Expanded(
-          //     child: Container(
-          //         margin: const EdgeInsets.only(bottom: 32.0),
-          //         child: ElevatedButton(
-          //             style:
-          //                 ElevatedButtonThemeApp.lightElevatedButtonTheme.style,
-          //             onPressed: () {
-          //               return;
-          //             },
-          //             child: const Text('Reroll Trip')))),
-          // const SizedBox(
-          //   width: AppValues.extraLargePadding,
-          // ),
+        padding: const EdgeInsets.symmetric(horizontal: AppValues.largePadding),
+        child: Row(children: [
           Expanded(
               child: Container(
                   margin: const EdgeInsets.only(bottom: 32.0),
                   child: ElevatedButton(
                       onPressed: () {
-                        return;
+                        AppNavigator.push(Routes.create_plan_trip);
                       },
                       child: const Text('Create trip')))),
-        ],
-      ),
-    );
+        ]));
   }
 }

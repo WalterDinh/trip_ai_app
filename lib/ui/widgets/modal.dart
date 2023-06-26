@@ -8,17 +8,19 @@ class Modal extends StatelessWidget {
     super.key,
     this.title,
     required this.child,
+    this.color,
   });
 
   final String? title;
   final Widget child;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.only(top: 14),
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.background,
+        color: color ?? Theme.of(context).colorScheme.background,
         borderRadius: const BorderRadius.only(
           topLeft: _borderRadius,
           topRight: _borderRadius,

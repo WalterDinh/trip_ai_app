@@ -9,8 +9,11 @@ import 'package:my_app/core/base/base_widget_screen_mixin.dart';
 import 'package:my_app/core/values/app_values.dart';
 
 import 'package:my_app/states/search/search_bloc.dart';
+import 'package:my_app/ui/screens/my_trip/widgets/item_more_trip.dart';
 
 import 'package:my_app/ui/widgets/spacer.dart';
+
+import 'widgets/item_result_search.dart';
 
 part 'sections/empty_data_search.dart';
 part 'sections/result_search.dart';
@@ -80,6 +83,10 @@ class _SearchScreenState extends State<SearchScreen> with BaseState {
           ),
         ),
         BlocBuilder<SearchBloc, SearchState>(builder: (context, state) {
+          return const ResultSearch(
+            data: [1, 2, 3, 4],
+          );
+
           if (state.status == SearchStateStatus.loading ||
               textSearch != controller.text) {
             return const Text('Loading');
@@ -93,8 +100,6 @@ class _SearchScreenState extends State<SearchScreen> with BaseState {
               state.listFolderDataSearch.isEmpty) {
             return EmptyDataSearch(context: context);
           }
-
-          return const ResultSearch();
         })
       ],
     );
