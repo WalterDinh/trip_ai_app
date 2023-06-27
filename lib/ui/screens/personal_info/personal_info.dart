@@ -3,7 +3,6 @@ import 'dart:io';
 import 'dart:ui';
 
 import 'package:country_picker/country_picker.dart';
-import 'package:currency_picker/currency_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_app/configs/colors.dart';
@@ -16,6 +15,7 @@ import 'package:my_app/ui/screens/personal_info/modals/level_modal.dart';
 import 'package:my_app/ui/screens/personal_info/modals/physical_modal.dart';
 import 'package:my_app/ui/screens/personal_info/widgets/item_info.dart';
 import 'package:my_app/ui/widgets/cache_image.dart';
+import 'package:my_app/ui/widgets/currency_picker/currency_picker.dart';
 import 'package:my_app/ui/widgets/elevated_container.dart';
 import 'package:my_app/ui/widgets/image_picker/image_picker_modal.dart';
 import 'package:my_app/ui/widgets/spacer.dart';
