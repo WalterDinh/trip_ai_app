@@ -9,7 +9,7 @@ import 'package:my_app/core/base/base_widget_screen_mixin.dart';
 import 'package:my_app/core/values/app_values.dart';
 
 import 'package:my_app/states/search/search_bloc.dart';
-import 'package:my_app/ui/screens/my_trip/widgets/item_more_trip.dart';
+import 'package:my_app/ui/widgets/input_search.dart';
 
 import 'package:my_app/ui/widgets/spacer.dart';
 
@@ -53,35 +53,12 @@ class _SearchScreenState extends State<SearchScreen> with BaseState {
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(
-              horizontal: AppValues.extraLargePadding),
-          child: TextField(
-            controller: controller,
-            enabled: true,
-            onChanged: _handleSearch,
-            decoration: InputDecoration(
-                hintText: 'Search',
-                hintStyle: Theme.of(context)
-                    .textTheme
-                    .titleMedium!
-                    .copyWith(color: AppColors.textHintColorGrey),
-                prefixIcon:
-                    Icon(Icons.search, color: Theme.of(context).primaryColor),
-                contentPadding: const EdgeInsets.all(14),
-                fillColor: AppColors.backgroundTextFieldOpacity,
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(15),
-                  borderSide:
-                      const BorderSide(color: Colors.transparent, width: 0.0),
-                ),
-                filled: true,
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(15),
-                  borderSide: BorderSide(
-                      color: Theme.of(context).primaryColor, width: 1.0),
-                )),
-          ),
-        ),
+            padding: const EdgeInsets.symmetric(
+                horizontal: AppValues.extraLargePadding),
+            child: InputSearch(
+              controller: controller,
+              handleSearch: _handleSearch,
+            )),
         BlocBuilder<SearchBloc, SearchState>(builder: (context, state) {
           return const ResultSearch(
             data: [1, 2, 3, 4],

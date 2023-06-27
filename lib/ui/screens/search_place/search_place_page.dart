@@ -5,6 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:my_app/configs/colors.dart';
 import 'package:my_app/core/base/base_widget_screen_mixin.dart';
 import 'package:my_app/core/values/app_values.dart';
+import 'package:my_app/ui/screens/search_place/widgets/item_search_place.dart';
+import 'package:my_app/ui/widgets/input_search.dart';
+
+part 'sections/list_success_place.dart';
 
 class SearchPlaceScreen extends StatefulWidget {
   const SearchPlaceScreen({super.key});
@@ -40,35 +44,23 @@ class _SearchPlaceScreenState extends State<SearchPlaceScreen> with BaseState {
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(
-              horizontal: AppValues.extraLargePadding),
-          child: TextField(
-            controller: controller,
-            enabled: true,
-            onChanged: _handleSearch,
-            decoration: InputDecoration(
-                hintText: 'Search',
-                hintStyle: Theme.of(context)
-                    .textTheme
-                    .titleMedium!
-                    .copyWith(color: AppColors.textHintColorGrey),
-                prefixIcon:
-                    Icon(Icons.search, color: Theme.of(context).primaryColor),
-                contentPadding: const EdgeInsets.all(14),
-                fillColor: AppColors.backgroundTextFieldOpacity,
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(15),
-                  borderSide:
-                      const BorderSide(color: Colors.transparent, width: 0.0),
-                ),
-                filled: true,
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(15),
-                  borderSide: BorderSide(
-                      color: Theme.of(context).primaryColor, width: 1.0),
-                )),
+          padding: const EdgeInsets.symmetric(horizontal: AppValues.padding),
+          child: Row(
+            children: [
+              Expanded(
+                  child: InputSearch(
+                controller: controller,
+                handleSearch: _handleSearch,
+              )),
+              IconButton(
+                  onPressed: () {
+                    return;
+                  },
+                  icon: const Icon(Icons.filter_list))
+            ],
           ),
         ),
+        ListSuccessPlace()
       ],
     );
   }
