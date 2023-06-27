@@ -7,6 +7,7 @@ import 'package:my_app/core/base/base_widget_screen_mixin.dart';
 import 'package:my_app/core/values/app_values.dart';
 import 'package:my_app/routes.dart';
 import 'package:my_app/states/sign_up/sign_up_cubit.dart';
+import 'package:my_app/ui/widgets/input_search.dart';
 import 'package:my_app/ui/widgets/ripple.dart';
 import 'package:my_app/ui/widgets/spacer.dart';
 import 'widgets/item_category.dart';
@@ -113,32 +114,10 @@ class _HomeScreenState extends State<HomeScreen> with BaseState {
 
   Widget _searchBar() {
     return Padding(
-      padding: const EdgeInsets.all(AppValues.extraLargePadding),
-      child: TextField(
-        onTap: onNavigateToSearch,
-        decoration: InputDecoration(
-            hintText: 'Search',
-            hintStyle: Theme.of(context)
-                .textTheme
-                .titleMedium!
-                .copyWith(color: AppColors.textHintColorGrey),
-            prefixIcon:
-                Icon(Icons.search, color: Theme.of(context).primaryColor),
-            contentPadding: const EdgeInsets.all(14),
-            fillColor: AppColors.backgroundTextFieldOpacity,
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(15),
-              borderSide:
-                  const BorderSide(color: Colors.transparent, width: 0.0),
-            ),
-            filled: true,
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(15),
-              borderSide:
-                  BorderSide(color: Theme.of(context).primaryColor, width: 1.0),
-            )),
-      ),
-    );
+        padding: const EdgeInsets.all(AppValues.extraLargePadding),
+        child: InputSearch(
+          onPress: onNavigateToSearch,
+        ));
   }
 
   Widget tabBar() {
