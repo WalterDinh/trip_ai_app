@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_app/core/fade_page_route.dart';
+import 'package:my_app/states/login/login_bloc.dart';
 import 'package:my_app/states/personal_info/personal_info_bloc.dart';
 import 'package:my_app/states/search/search_bloc.dart';
 import 'package:my_app/states/sign_up/sign_up_cubit.dart';
@@ -113,7 +114,12 @@ class AppNavigator {
                 create: (context) => SearchBloc(),
                 child: const SearchScreen()));
       case _Paths.login:
-        return FadeRoute(page: const LoginScreen());
+        return FadeRoute(
+          page: BlocProvider<LoginBloc>(
+            create: (context) => LoginBloc(),
+            child: const LoginScreen(),
+          ),
+        );
       case _Paths.main:
         return FadeRoute(page: MainAppNavigator());
       case _Paths.notificationDetail:

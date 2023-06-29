@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:my_app/configs/colors.dart';
 import 'package:my_app/configs/images.dart';
 import 'package:my_app/core/base/base_widget_screen_mixin.dart';
 import 'package:my_app/core/values/app_values.dart';
 import 'package:my_app/routes.dart';
+import 'package:my_app/states/login/login_bloc.dart';
 import 'package:my_app/ui/widgets/input/simple_text_form_field.dart';
 import 'package:my_app/ui/widgets/main_app_bar.dart';
 import 'package:my_app/ui/widgets/ripple.dart';
@@ -22,33 +24,27 @@ class _LoginScreenState extends State<LoginScreen> with BaseState {
       SimpleTextFormFieldController();
   final SimpleTextFormFieldController textPasswordController =
       SimpleTextFormFieldController();
+
+  LoginBloc get loginBloc => context.read<LoginBloc>();
   bool loading = true;
 
   void handleLoginFacebook() {
-    return;
+    loginBloc.add(const LoginWithSocial('', 'facebook', null));
   }
 
   void handleLoginApple() {
-    return;
+    loginBloc.add(const LoginWithSocial('', 'apple', null));
   }
 
   void handleLoginGoogle() {
-    return;
-  }
-
-  void checkData() async {
-    return;
+    loginBloc.add(const LoginWithSocial('', 'google', null));
   }
 
   void onLogin() async {
+    loginBloc.add(LoginWithEmailPassword(
+        textEmailController.value, textPasswordController.value));
     AppNavigator.popToTop();
     AppNavigator.replaceWith(Routes.main);
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    checkData();
   }
 
   @override
