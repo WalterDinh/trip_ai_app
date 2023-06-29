@@ -35,6 +35,7 @@ dart_code_metrics:
     - test/**
     - ios/**
     - android/**
+    - lib/ui/widgets/currency_picker/**
   rules:
     newline-before-return:
       severity: error

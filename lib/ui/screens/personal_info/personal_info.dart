@@ -268,6 +268,17 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen>
       theme: CurrencyPickerThemeData(
         backgroundColor: Colors.white,
         bottomSheetHeight: height,
+        searchFieldDecoration: InputDecoration(
+          hintText: 'Search',
+          hintStyle: Theme.of(context)
+              .textTheme
+              .titleMedium!
+              .copyWith(color: AppColors.textHintColorGrey),
+          border: OutlineInputBorder(
+            borderSide: const BorderSide(color: AppColors.grey800, width: 1),
+            borderRadius: BorderRadius.circular(15),
+          ),
+        ),
       ),
       context: context,
       onSelect: (currency) {

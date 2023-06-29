@@ -52,7 +52,9 @@ void showCurrencyPicker({
   required ValueChanged<Currency> onSelect,
   List<String>? favorite,
   List<String>? currencyFilter,
+  @Deprecated('Set the hint in searchFieldDecoration instead')
   String? searchHint,
+  InputDecoration? searchFieldDecoration,
   bool showSearchField = true,
   bool showFlag = true,
   bool showCurrencyName = true,
@@ -70,6 +72,7 @@ void showCurrencyPicker({
     onSelect: onSelect,
     showSearchField: showSearchField,
     searchHint: searchHint,
+    searchFieldDecoration: searchFieldDecoration,
     showFlag: showFlag,
     showCurrencyName: showCurrencyName,
     showCurrencyCode: showCurrencyCode,

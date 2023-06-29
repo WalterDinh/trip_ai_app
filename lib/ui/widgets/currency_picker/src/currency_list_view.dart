@@ -45,6 +45,7 @@ class CurrencyListView extends StatefulWidget {
   /// Hint of the search TextField (optional).
   ///
   /// Defaults Search.
+  @Deprecated('Set the hint in searchFieldDecoration instead')
   final String? searchHint;
 
   final ScrollController? controller;
@@ -61,6 +62,7 @@ class CurrencyListView extends StatefulWidget {
     this.favorite,
     this.currencyFilter,
     this.showSearchField = true,
+    @Deprecated('Set the hint in searchFieldDecoration instead')
     this.searchHint,
     this.showCurrencyCode = true,
     this.showCurrencyName = true,
@@ -71,7 +73,7 @@ class CurrencyListView extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _CurrencyListViewState createState() => _CurrencyListViewState();
+  State<CurrencyListView> createState() => _CurrencyListViewState();
 }
 
 class _CurrencyListViewState extends State<CurrencyListView> {
@@ -115,6 +117,9 @@ class _CurrencyListViewState extends State<CurrencyListView> {
 
   @override
   Widget build(BuildContext context) {
+    final searchFieldDecoration =
+        widget.theme?.searchFieldDecoration ?? _defaultSearchFieldDecoration;
+
     return Column(
       children: <Widget>[
         const SizedBox(height: 12),
@@ -123,16 +128,7 @@ class _CurrencyListViewState extends State<CurrencyListView> {
           child: widget.showSearchField
               ? TextField(
                   controller: _searchController,
-                  decoration: InputDecoration(
-                    labelText: widget.searchHint ?? "Search",
-                    hintText: widget.searchHint ?? "Search",
-                    prefixIcon: const Icon(Icons.search),
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: const Color(0xFF8C98A8).withOpacity(0.2),
-                      ),
-                    ),
-                  ),
+                  decoration: searchFieldDecoration,
                   onChanged: _filterSearchResults,
                 )
               : Container(),
@@ -273,4 +269,16 @@ class _CurrencyListViewState extends State<CurrencyListView> {
       TextStyle(fontSize: 15, color: Theme.of(context).hintColor);
 
   TextStyle get _defaultCurrencySignTextStyle => const TextStyle(fontSize: 18);
+
+  InputDecoration get _defaultSearchFieldDecoration =>
+      InputDecoration(
+        labelText: widget.searchHint ?? "Search",
+        hintText: widget.searchHint ?? "Search",
+        prefixIcon: const Icon(Icons.search),
+        border: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: const Color(0xFF8C98A8).withOpacity(0.2),
+          ),
+        ),
+      );
 }
