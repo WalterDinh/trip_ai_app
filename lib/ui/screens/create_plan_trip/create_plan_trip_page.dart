@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/configs/colors.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_app/configs/theme.dart';
 import 'package:my_app/core/base/base_widget_screen_mixin.dart';
 import 'package:my_app/core/values/app_values.dart';
 import 'package:my_app/routes.dart';
+import 'package:my_app/states/create_trip/create_trip_bloc.dart';
 import 'package:my_app/ui/widgets/spacer.dart';
 import 'package:my_app/ui/widgets/trip/basic_info_plan.dart';
 import 'package:my_app/ui/widgets/trip/info_trip_bar_tab.dart';
@@ -31,17 +31,30 @@ final List<PlanTabBarItem> myTabs = [
   PlanTabBarItem('Reviews', const ReviewTab()),
 ];
 
-class CreatePlanTripScreen extends StatefulWidget {
+class CreatePlanTripScreen extends StatelessWidget {
   const CreatePlanTripScreen({super.key});
 
   @override
-  State<StatefulWidget> createState() => _CreatePlanTripScreenState();
+  Widget build(BuildContext context) {
+    return BlocProvider<CreateTripBloc>(
+      create: (context) => CreateTripBloc(),
+      child: const CreatePlanTripView(),
+    );
+  }
 }
 
-class _CreatePlanTripScreenState extends State<CreatePlanTripScreen>
+class CreatePlanTripView extends StatefulWidget {
+  const CreatePlanTripView({super.key});
+
+  @override
+  State<StatefulWidget> createState() => _CreatePlanTripViewState();
+}
+
+class _CreatePlanTripViewState extends State<CreatePlanTripView>
     with TickerProviderStateMixin, BaseState {
   late TabController tabController;
   int currentPage = 0;
+  CreateTripBloc get p => context.read<CreateTripBloc>();
 
   @override
   void initState() {

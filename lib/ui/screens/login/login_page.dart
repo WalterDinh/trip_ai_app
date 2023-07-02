@@ -12,14 +12,25 @@ import 'package:my_app/ui/widgets/main_app_bar.dart';
 import 'package:my_app/ui/widgets/ripple.dart';
 import 'package:my_app/ui/widgets/spacer.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key}) : super(key: key);
-
+class LoginScreen extends StatelessWidget {
+  const LoginScreen();
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  Widget build(BuildContext context) {
+    return BlocProvider<LoginBloc>(
+      create: (context) => LoginBloc(),
+      child: const LoginView(),
+    );
+  }
 }
 
-class _LoginScreenState extends State<LoginScreen> with BaseState {
+class LoginView extends StatefulWidget {
+  const LoginView({Key? key}) : super(key: key);
+
+  @override
+  State<LoginView> createState() => _LoginViewState();
+}
+
+class _LoginViewState extends State<LoginView> with BaseState {
   final SimpleTextFormFieldController textEmailController =
       SimpleTextFormFieldController();
   final SimpleTextFormFieldController textPasswordController =

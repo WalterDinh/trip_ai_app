@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:my_app/configs/colors.dart';
 import 'package:my_app/configs/images.dart';
@@ -6,6 +7,7 @@ import 'package:my_app/core/base/base_widget_mixin.dart';
 import 'package:my_app/core/base/base_widget_screen_mixin.dart';
 import 'package:my_app/core/values/app_values.dart';
 import 'package:my_app/routes.dart';
+import 'package:my_app/states/home/home_bloc.dart';
 import 'package:my_app/states/sign_up/sign_up_cubit.dart';
 import 'package:my_app/ui/widgets/input_search.dart';
 import 'package:my_app/ui/widgets/ripple.dart';
@@ -19,19 +21,30 @@ part 'sections/list_category.dart';
 
 List<String> dataTab = ['All', 'Popular', 'Rating', 'Most Searched'];
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
-  State<StatefulWidget> createState() => _HomeScreenState();
+  Widget build(Object context) {
+    return BlocProvider<HomeBloc>(
+        create: (context) => HomeBloc(), child: const HomeView());
+  }
 }
 
-class _HomeScreenState extends State<HomeScreen> with BaseState {
-  bool showTitle = false;
+class HomeView extends StatefulWidget {
+  const HomeView({super.key});
+
+  @override
+  State<StatefulWidget> createState() => _HomeViewState();
+}
+
+class _HomeViewState extends State<HomeView> with BaseState {
+  HomeBloc get homeBloc => context.read<HomeBloc>();
 
   @override
   void initState() {
     super.initState();
+    homeBloc.add(const GetDataRecommendTripStarted(''));
   }
 
   @override

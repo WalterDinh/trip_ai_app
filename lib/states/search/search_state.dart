@@ -11,16 +11,14 @@ enum SearchStateStatus {
 
 class SearchState {
   final List<dynamic> listRecent;
-  final List<dynamic> listFolderDataSearch;
-  final List<dynamic> listFileScanDataSearch;
+  final List<dynamic> listTripDataSearch;
 
   final SearchStateStatus status;
   final Exception? error;
   const SearchState._({
     this.status = SearchStateStatus.initial,
     this.listRecent = const [],
-    this.listFolderDataSearch = const [],
-    this.listFileScanDataSearch = const [],
+    this.listTripDataSearch = const [],
     this.error,
   });
   const SearchState.initial() : this._();
@@ -47,17 +45,14 @@ class SearchState {
 
   SearchState copyWith({
     final List<dynamic>? listRecent,
-    final List<dynamic>? listFolderDataSearch,
-    final List<dynamic>? listFileScanDataSearch,
+    final List<dynamic>? listTripDataSearch,
     final SearchStateStatus? status,
     final Exception? error,
   }) {
     return SearchState._(
         status: status ?? this.status,
         listRecent: listRecent ?? this.listRecent,
-        listFolderDataSearch: listFolderDataSearch ?? this.listFolderDataSearch,
-        listFileScanDataSearch:
-            listFileScanDataSearch ?? this.listFileScanDataSearch,
+        listTripDataSearch: listTripDataSearch ?? this.listTripDataSearch,
         error: error ?? this.error);
   }
 }
