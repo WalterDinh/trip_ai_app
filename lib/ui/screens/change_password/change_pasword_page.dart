@@ -1,21 +1,33 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/configs/colors.dart';
-import 'package:my_app/configs/images.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:my_app/core/base/base_widget_screen_mixin.dart';
 import 'package:my_app/core/values/app_values.dart';
 import 'package:my_app/routes.dart';
+import 'package:my_app/states/change_password/change_password_cubit.dart';
 import 'package:my_app/ui/widgets/input/simple_text_form_field.dart';
-import 'package:my_app/ui/widgets/main_app_bar.dart';
 import 'package:my_app/ui/widgets/spacer.dart';
 
-class ChangePasswordScreen extends StatefulWidget {
+class ChangePasswordScreen extends StatelessWidget {
   const ChangePasswordScreen({Key? key}) : super(key: key);
 
   @override
-  State<ChangePasswordScreen> createState() => _ChangePasswordScreenState();
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => ChangePasswordCubit(),
+      child: const ChangePasswordView(),
+    );
+  }
 }
 
-class _ChangePasswordScreenState extends State<ChangePasswordScreen>
+class ChangePasswordView extends StatefulWidget {
+  const ChangePasswordView({Key? key}) : super(key: key);
+
+  @override
+  State<ChangePasswordView> createState() => _ChangePasswordViewState();
+}
+
+class _ChangePasswordViewState extends State<ChangePasswordView>
     with BaseState {
   final SimpleTextFormFieldController textPasswordController =
       SimpleTextFormFieldController();

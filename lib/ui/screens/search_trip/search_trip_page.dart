@@ -19,14 +19,23 @@ part 'sections/empty_data_search.dart';
 part 'sections/result_search.dart';
 part 'sections/default_search_view.dart';
 
-class SearchScreen extends StatefulWidget {
+class SearchScreen extends StatelessWidget {
   const SearchScreen({super.key});
-
   @override
-  State<StatefulWidget> createState() => _SearchScreenState();
+  Widget build(BuildContext context) {
+    return BlocProvider<SearchBloc>(
+        create: (context) => SearchBloc(), child: const SearchView());
+  }
 }
 
-class _SearchScreenState extends State<SearchScreen> with BaseState {
+class SearchView extends StatefulWidget {
+  const SearchView({super.key});
+
+  @override
+  State<StatefulWidget> createState() => _SearchViewState();
+}
+
+class _SearchViewState extends State<SearchView> with BaseState {
   TextEditingController controller = TextEditingController();
   String textSearch = '';
   Timer? _debounceTimer;
@@ -73,8 +82,8 @@ class _SearchScreenState extends State<SearchScreen> with BaseState {
             return DefaultSearchView(context: context);
           }
 
-          if (state.listFileScanDataSearch.isEmpty &&
-              state.listFolderDataSearch.isEmpty) {
+          if (state.listTripDataSearch.isEmpty &&
+              state.listTripDataSearch.isEmpty) {
             return EmptyDataSearch(context: context);
           }
         })

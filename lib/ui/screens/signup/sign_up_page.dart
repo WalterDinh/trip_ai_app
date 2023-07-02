@@ -17,14 +17,24 @@ part 'sections/sign_up_step_1.dart';
 part 'sections/sign_up_step_2.dart';
 part 'sections/sign_up_step_3.dart';
 
-class SignUpScreen extends StatefulWidget {
+class SignUpScreen extends StatelessWidget {
   const SignUpScreen({Key? key}) : super(key: key);
 
   @override
-  State<SignUpScreen> createState() => _SignUpScreenState();
+  Widget build(BuildContext context) {
+    return BlocProvider(
+        create: (_) => SignUpCubit(), child: const SignUpView());
+  }
 }
 
-class _SignUpScreenState extends State<SignUpScreen> {
+class SignUpView extends StatefulWidget {
+  const SignUpView({Key? key}) : super(key: key);
+
+  @override
+  State<SignUpView> createState() => _SignUpViewState();
+}
+
+class _SignUpViewState extends State<SignUpView> {
   void checkData() async {
     return;
   }

@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_app/core/fade_page_route.dart';
-import 'package:my_app/states/login/login_bloc.dart';
 import 'package:my_app/states/personal_info/personal_info_bloc.dart';
-import 'package:my_app/states/search/search_bloc.dart';
-import 'package:my_app/states/sign_up/sign_up_cubit.dart';
 import 'package:my_app/ui/screens/change_password/change_pasword_page.dart';
 import 'package:my_app/ui/screens/detail_trip/detail_trip_page.dart';
 import 'package:my_app/ui/screens/friends/friends.dart';
@@ -103,22 +100,14 @@ class AppNavigator {
       case _Paths.create_plan_trip:
         return FadeRoute(page: const CreatePlanTripScreen());
       case _Paths.sign_up:
-        return FadeRoute(
-            page: BlocProvider(
-                create: (_) => SignUpCubit(), child: const SignUpScreen()));
+        return FadeRoute(page: const SignUpScreen());
       case _Paths.home:
         return FadeRoute(page: const HomeScreen());
       case _Paths.search_trip:
-        return FadeRoute(
-            page: BlocProvider<SearchBloc>(
-                create: (context) => SearchBloc(),
-                child: const SearchScreen()));
+        return FadeRoute(page: const SearchScreen());
       case _Paths.login:
         return FadeRoute(
-          page: BlocProvider<LoginBloc>(
-            create: (context) => LoginBloc(),
-            child: const LoginScreen(),
-          ),
+          page: const LoginScreen(),
         );
       case _Paths.main:
         return FadeRoute(page: MainAppNavigator());
