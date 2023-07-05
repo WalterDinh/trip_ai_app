@@ -24,17 +24,28 @@ class NotificationScreen extends StatefulWidget {
 
 class _NotificationScreenState extends State<NotificationScreen>
     with BaseState {
-  late SwipeActionController controller;
+  static const double _endReachedThreshold = 200;
+
+  late SwipeActionController _swipeActionController;
+  final ScrollController _scrollController = ScrollController();
 
   NotificationBloc get notificationBloc => context.read<NotificationBloc>();
 
   @override
   void initState() {
     super.initState();
-    controller = SwipeActionController();
+    _swipeActionController = SwipeActionController();
     scheduleMicrotask(() {
+      _scrollController.addListener(_onScroll);
+
       notificationBloc.add(const NotificationLoadEvent());
     });
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
   }
 
   @override
@@ -42,22 +53,55 @@ class _NotificationScreenState extends State<NotificationScreen>
     return const Text("Notifications");
   }
 
+  void _onScroll() {
+    final innerController = _scrollController;
+
+    if (!innerController.hasClients) return;
+
+    final extentAfter = innerController.position.extentAfter;
+
+    final thresholdReached =
+        extentAfter > 0 && extentAfter < _endReachedThreshold;
+
+    if (thresholdReached) {
+      notificationBloc.add(NotificationLoadMoreEvent());
+    }
+  }
+
   @override
   Widget body(BuildContext context) {
-    return NotificationStateStatusSelector((status) {
-      print('NotificationStateStatusSelector $status');
+    // return NotificationStateStatusSelector((status) {
+    return CustomScrollView(
+      controller: _scrollController,
+      slivers: [
+        NotificationsSelector((notifications) {
+          return SliverList(
+            delegate: SliverChildBuilderDelegate(
+              (context, index) {
+                return _buildNotificationItem(index, notifications[index]);
+              },
+              childCount: notifications.length,
+            ),
+          );
+        }),
+        SliverToBoxAdapter(
+          child: NotificationCanLoadMoreSelector((canLoadMore) {
+            if (!canLoadMore) {
+              return const SizedBox.shrink();
+            }
 
-      return NotificationsSelector((notifications) {
-        print('NotificationsSelector ${notifications.length}');
-
-        return ListView.builder(
-          physics: const BouncingScrollPhysics(),
-          itemBuilder: (context, index) =>
-              _buildNotificationItem(index, notifications[index]),
-          itemCount: notifications.length,
-        );
-      });
-    });
+            return Container(
+              padding: const EdgeInsets.fromLTRB(0, 16, 0, 28),
+              alignment: Alignment.center,
+              child: const CircularProgressIndicator(),
+            );
+          }),
+        ),
+        SliverToBoxAdapter(
+            child: VSpacer(MediaQuery.of(context).padding.bottom)),
+      ],
+    );
+    // });
   }
 
   Widget _buildNotificationContent(NotificationEntity notification) {
@@ -74,7 +118,7 @@ class _NotificationScreenState extends State<NotificationScreen>
           ]),
       child: Ripple(
         onTap: () {
-          controller.closeAllOpenCell();
+          _swipeActionController.closeAllOpenCell();
           AppNavigator.push(Routes.notification_detail);
         },
         child: Padding(
@@ -108,7 +152,7 @@ class _NotificationScreenState extends State<NotificationScreen>
     return SwipeActionCell(
         backgroundColor: Colors.transparent,
         closeWhenScrolling: true,
-        controller: controller,
+        controller: _swipeActionController,
         key: ValueKey(notification),
         trailingActions: _buildNotificationActions(index),
         child: _buildNotificationContent(notification));
