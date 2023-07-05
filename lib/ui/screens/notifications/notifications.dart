@@ -119,6 +119,7 @@ class _NotificationScreenState extends State<NotificationScreen>
       child: Ripple(
         onTap: () {
           _swipeActionController.closeAllOpenCell();
+          notificationBloc.add(NotificationSelectEvent(notification));
           AppNavigator.push(Routes.notification_detail);
         },
         child: Padding(

@@ -122,16 +122,7 @@ class AppNavigator {
           ),
         );
       case _Paths.main:
-        return FadeRoute(
-          page: MultiBlocProvider(
-            providers: [
-              BlocProvider(
-                create: (_) => NotificationBloc(),
-              )
-            ],
-            child: MainAppNavigator(),
-          ),
-        );
+        return FadeRoute(page: MainAppNavigator());
       case _Paths.notificationDetail:
         return FadeRoute(page: const NotificationDetailScreen());
       case _Paths.personalInfo:

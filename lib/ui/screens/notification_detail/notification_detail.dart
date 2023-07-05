@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_app/configs/images.dart';
 import 'package:my_app/core/base/base_widget_screen_mixin.dart';
 import 'package:my_app/core/values/app_values.dart';
+import 'package:my_app/domain/entities/notification.dart';
+import 'package:my_app/states/notification/notification_bloc.dart';
 import 'package:my_app/ui/widgets/cache_image.dart';
 import 'package:my_app/ui/widgets/frosted_icon_button.dart';
 import 'package:my_app/ui/widgets/spacer.dart';
@@ -16,8 +19,12 @@ class NotificationDetailScreen extends StatefulWidget {
 
 class _NotificationDetailScreenState extends State<NotificationDetailScreen>
     with BaseState {
+  NotificationBloc get notificationBloc => context.read<NotificationBloc>();
+
   @override
   Widget body(BuildContext context) {
+    final notification = notificationBloc.state.selectedNotification;
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 30.0),
       child: Column(mainAxisAlignment: MainAxisAlignment.end, children: [
@@ -29,9 +36,9 @@ class _NotificationDetailScreenState extends State<NotificationDetailScreen>
               children: [
                 _buildTopImage(),
                 const VSpacer(24),
-                _buildPeopleAction(),
+                _buildPeopleAction(notification),
                 const VSpacer(24),
-                const Text('Recent tweet from Jack Lemmon'),
+                Text(notification?.title ?? ""),
                 const VSpacer(14),
                 const Text(
                   "Recent tweet from Jack Lemmon Nulla Lorem mollit cupidatat irure. "
@@ -83,31 +90,29 @@ class _NotificationDetailScreenState extends State<NotificationDetailScreen>
     return true;
   }
 
-  Widget _buildPeopleAction() {
+  Widget _buildPeopleAction(NotificationEntity? notification) {
     return Row(
-      children: const [
+      children: [
         SizedBox(
           width: 32,
           height: 32,
           child: ClipRRect(
-            borderRadius: BorderRadius.all(Radius.circular(AppValues.radius)),
+            borderRadius: const BorderRadius.all(Radius.circular(AppValues.radius)),
             child: CacheImage(
               fit: BoxFit.cover,
-              path:
-                  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-qbCmdpCG8m5YwrGGHSvd0ghiNXAj-IOoiA&usqp=CAU',
+              path: notification?.url ?? "",
             ),
           ),
         ),
-        HSpacer(8),
+        const HSpacer(8),
         SizedBox(
           width: 32,
           height: 32,
           child: ClipRRect(
-            borderRadius: BorderRadius.all(Radius.circular(AppValues.radius)),
+            borderRadius: const BorderRadius.all(Radius.circular(AppValues.radius)),
             child: CacheImage(
               fit: BoxFit.cover,
-              path:
-                  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-qbCmdpCG8m5YwrGGHSvd0ghiNXAj-IOoiA&usqp=CAU',
+              path: notification?.url ?? "",
             ),
           ),
         ),

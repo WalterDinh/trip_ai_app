@@ -16,3 +16,9 @@ class NotificationDeleteEvent extends NotificationEvent {
 
   const NotificationDeleteEvent(this.index);
 }
+
+class NotificationSelectEvent extends NotificationEvent {
+  final NotificationEntity notification;
+
+  const NotificationSelectEvent(this.notification);
+}

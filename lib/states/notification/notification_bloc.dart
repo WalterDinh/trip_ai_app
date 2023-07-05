@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
@@ -23,6 +24,7 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
       _onDelete,
       transformer: (events, mapper) => events.switchMap(mapper),
     );
+    on<NotificationSelectEvent>(_onSelectNotification);
   }
 
   void _onLoad(
@@ -85,5 +87,10 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
   void _onDelete(
       NotificationDeleteEvent event, Emitter<NotificationState> emit) {
     // TODO: delete notification
+  }
+
+  void _onSelectNotification(
+      NotificationSelectEvent event, Emitter<NotificationState> emit) {
+    emit(state.copyWith(selectedNotification: event.notification));
   }
 }

@@ -13,6 +13,7 @@ enum NotificationStateStatus {
 class NotificationState {
   final NotificationStateStatus status;
   final List<NotificationEntity> notificationList;
+  final NotificationEntity? selectedNotification;
   final int page;
   final Exception? error;
   final bool canLoadMore;
@@ -20,6 +21,7 @@ class NotificationState {
   const NotificationState._(
       {this.status = NotificationStateStatus.initial,
       this.notificationList = const [],
+      this.selectedNotification,
       this.page = 0,
       this.error,
       this.canLoadMore = true});
@@ -74,6 +76,7 @@ class NotificationState {
   NotificationState copyWith({
     NotificationStateStatus? status,
     List<NotificationEntity>? notificationList,
+    NotificationEntity? selectedNotification,
     final File? photoScan,
     int? page,
     bool? canLoadMore,
@@ -82,6 +85,7 @@ class NotificationState {
     return NotificationState._(
       status: status ?? this.status,
       notificationList: notificationList ?? this.notificationList,
+      selectedNotification: selectedNotification ?? this.selectedNotification,
       page: page ?? this.page,
       canLoadMore: canLoadMore ?? this.canLoadMore,
       error: error ?? this.error,
