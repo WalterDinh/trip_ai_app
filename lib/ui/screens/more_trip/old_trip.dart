@@ -13,16 +13,16 @@ class _OldTripScreenState extends State<OldTripPage> {
     return ListView.separated(
         padding: const EdgeInsets.symmetric(vertical: 16),
         itemBuilder: (context, index) {
-          return ItemMoreTrip(image: oldTripImages[index]);
+          return ItemMoreTrip(image: _oldTripImages[index]);
         },
         separatorBuilder: (context, index) {
           return const VSpacer(12);
         },
-        itemCount: oldTripImages.length);
+        itemCount: _oldTripImages.length);
   }
 }
 
-final List<AssetImage> oldTripImages = [
+final List<AssetImage> _oldTripImages = [
   AppImages.introduction3,
   AppImages.introduction1,
   AppImages.introduction3,
